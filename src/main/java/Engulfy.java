@@ -7,6 +7,9 @@ public class Engulfy {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
+        String[] tasks = new String[100];
+        int taskCount = 0;
+
         while (true) {
             String userInput = sc.nextLine();
             System.out.println("____________________________________________________________");
@@ -16,8 +19,20 @@ public class Engulfy {
                 System.out.println("____________________________________________________________");
                 sc.close();
                 return;
+            } else if (userInput.toLowerCase().equals("list")) {
+                if (taskCount == 0) {
+                    System.out.println("No tasks yet!");
+                    System.out.println("____________________________________________________________");
+                } else {
+                    for (int i = 0; i < taskCount; i++) {
+                        System.out.println((i + 1) + ". " + tasks[i]);
+                    }
+                    System.out.println("____________________________________________________________");
+                }
             } else {
-                System.out.println(userInput);
+                tasks[taskCount] = userInput;
+                taskCount++;
+                System.out.println("added: "+ userInput);
                 System.out.println("____________________________________________________________");
                 continue;
             }
