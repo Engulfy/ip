@@ -31,9 +31,8 @@ public class Engulfy {
                     } else {
                         System.out.println("Here are the tasks in your list:");
                         for (int i = 0; i < taskCount; i++) {
-                            System.out.println((i + 1) + ". " + tasks[i]);
+                            System.out.println("    " + (i + 1) + ". " + tasks[i]);
                         }
-                        System.out.println("____________________________________________________________");
                     }
                     continue;
 
@@ -43,16 +42,12 @@ public class Engulfy {
                         if (taskNumber >= 1 && taskNumber <= taskCount) {
                             tasks[taskNumber - 1].markAsDone();
                             System.out.println("Nice! I've marked this task as done:");
-                            System.out.println("\t" + tasks[taskNumber - 1]);
-                            System.out.println("____________________________________________________________");
+                            System.out.println("    " + tasks[taskNumber - 1]);
                         } else {
                             System.out.println("Task number out of range.");
-                            System.out.println("____________________________________________________________");
-
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("Please specify a valid task number.");
-                        System.out.println("____________________________________________________________");
                     }
                     continue;
 
@@ -62,15 +57,12 @@ public class Engulfy {
                         if (taskNumber >= 1 && taskNumber <= taskCount) {
                             tasks[taskNumber - 1].markAsNotDone();
                             System.out.println("OK, I've marked this task as not done yet:");
-                            System.out.println("\t" + tasks[taskNumber - 1]);
-                            System.out.println("____________________________________________________________");
+                            System.out.println("    " + tasks[taskNumber - 1]);
                         } else {
                             System.out.println("Task number out of range.");
-                            System.out.println("____________________________________________________________");
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("Please specify a valid task number.");
-                        System.out.println("____________________________________________________________");
                     }
                     continue;
 
@@ -84,15 +76,13 @@ public class Engulfy {
                         String[] eventSplit = inputArr[1].split(" /from | /to ");
                         tasks[taskCount] = new Event(eventSplit[0], eventSplit[1], eventSplit[2]);
                     }
-                    System.out.println("Got it. I've added this task: \n" + "\t" + tasks[taskCount]);
+                    System.out.println("Got it. I've added this task: \n    " + tasks[taskCount]);
                     taskCount++;
                     String task_form = "task";
                     if (taskCount > 1) {
                         task_form = "tasks";
                     }
                     System.out.printf("Now you have %d %s in the list.\n", taskCount, task_form);
-                    System.out.println("____________________________________________________________");
-                    continue;
             }
         }
     }
