@@ -43,7 +43,7 @@ public class Engulfy {
                         if (taskNumber >= 1 && taskNumber <= taskCount) {
                             tasks[taskNumber - 1].markAsDone();
                             System.out.println("Nice! I've marked this task as done:");
-                            System.out.println(tasks[taskNumber - 1]);
+                            System.out.println("\t" + tasks[taskNumber - 1]);
                             System.out.println("____________________________________________________________");
                         } else {
                             System.out.println("Task number out of range.");
@@ -62,7 +62,7 @@ public class Engulfy {
                         if (taskNumber >= 1 && taskNumber <= taskCount) {
                             tasks[taskNumber - 1].markAsNotDone();
                             System.out.println("OK, I've marked this task as not done yet:");
-                            System.out.println(tasks[taskNumber - 1]);
+                            System.out.println("\t" + tasks[taskNumber - 1]);
                             System.out.println("____________________________________________________________");
                         } else {
                             System.out.println("Task number out of range.");
@@ -75,9 +75,22 @@ public class Engulfy {
                     continue;
 
                 default:
-                    tasks[taskCount] = new Task(userInput);
+                    if (instruction.equals("todo")) {
+                        tasks[taskCount] = new Todo(inputArr[1]);
+                    } else if (instruction.equals("deadline")) {
+                        String[] deadlineSplit = inputArr[1].split(" /by ", 2);
+                        tasks[taskCount] = new Deadline(deadlineSplit[0], deadlineSplit[1]);
+                    } else {
+                        String[] eventSplit = inputArr[1].split(" /from | /to ");
+                        tasks[taskCount] = new Event(eventSplit[0], eventSplit[1], eventSplit[2]);
+                    }
+                    System.out.println("Got it. I've added this task: \n" + "\t" + tasks[taskCount]);
                     taskCount++;
-                    System.out.println("added: " + userInput);
+                    String task_form = "task";
+                    if (taskCount > 1) {
+                        task_form = "tasks";
+                    }
+                    System.out.printf("Now you have %d %s in the list.\n", taskCount, task_form);
                     System.out.println("____________________________________________________________");
                     continue;
             }
