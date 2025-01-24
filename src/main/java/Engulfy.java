@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Engulfy {
     public static void main(String[] args) {
@@ -7,8 +8,7 @@ public class Engulfy {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int taskCount = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
 
         while (true) {
             String userInput = sc.nextLine();
@@ -28,10 +28,10 @@ public class Engulfy {
 
                     case "list":
                         validateInstr(inputArr, "I do not fully understand what this means :/");
-                        if (taskCount > 0) {
+                        if (!tasks.isEmpty()) {
                             System.out.println("Here are the tasks in your list:");
-                            for (int i = 0; i < taskCount; i++) {
-                                System.out.println("    " + (i + 1) + ". " + tasks[i]);
+                            for (int i = 0; i < tasks.size(); i++) {
+                                System.out.println("    " + (i + 1) + ". " + tasks.get(i));
                             }
                         } else {
                             System.out.println("No tasks yet!");
@@ -39,14 +39,28 @@ public class Engulfy {
                         }
                         continue;
 
+                    case "delete":
+                        try {
+                            int deleteIndex = Integer.parseInt(index);
+                            if (deleteIndex >= 1 && deleteIndex <= tasks.size()) {
+                                Task removedTask = tasks.remove(deleteIndex - 1);
+                                System.out.println("Noted. I've removed this task:\n    " + removedTask);
+                                System.out.printf("Now you have %d %s in the list.%n", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+                            } else {
+                                throw new EngulfyErrors("Your task number is not in my database to be deleted! try again :D");
+                            }
+                        } catch (EngulfyErrors e) {
+                            System.out.println(e.getMessage());
+                        }
+                        continue;
+
                     case "mark":
-                        validateInstr(inputArr, "I do not fully understand what this means :/");
                         try {
                             int taskNumber = Integer.parseInt(index);
-                            if (taskNumber >= 1 && taskNumber <= taskCount) {
-                                tasks[taskNumber - 1].markAsDone();
+                            if (taskNumber >= 1 && taskNumber <= tasks.size()) {
+                                tasks.get(taskNumber - 1).markAsDone();
                                 System.out.println("Nice! I've marked this task as done:");
-                                System.out.println("    " + tasks[taskNumber - 1]);
+                                System.out.println("    " + tasks.get(taskNumber - 1));
                             } else {
                                 throw new EngulfyErrors("Your task number is a little TOOOO big or small! try again :D");
                             }
@@ -58,10 +72,10 @@ public class Engulfy {
                     case "unmark":
                         try {
                             int taskNumber = Integer.parseInt(index);
-                            if (taskNumber >= 1 && taskNumber <= taskCount) {
-                                tasks[taskNumber - 1].markAsNotDone();
+                            if (taskNumber >= 1 && taskNumber <= tasks.size()) {
+                                tasks.get(taskNumber - 1).markAsNotDone();
                                 System.out.println("OK, I've marked this task as not done yet:");
-                                System.out.println("    " + tasks[taskNumber - 1]);
+                                System.out.println("    " + tasks.get(taskNumber - 1));
                             } else {
                                 throw new EngulfyErrors("Your task number is a little TOOOO big or small! try again :D");
                             }
@@ -74,25 +88,24 @@ public class Engulfy {
                         try {
                             if (instruction.equals("todo")) {
                                 validateInstr2(inputArr, "I need a description to help you keep track ;-;");
-                                tasks[taskCount] = new Todo(inputArr[1]);
+                                tasks.add(tasks.size(), new Todo(inputArr[1]));
                             } else if (instruction.equals("deadline")) {
                                 validateInstr2(inputArr, "I need a description to help you keep track ;-;");
                                 String[] deadlineSplit = inputArr[1].split(" /by ", 2);
-                                tasks[taskCount] = new Deadline(deadlineSplit[0], deadlineSplit[1]);
+                                tasks.add(tasks.size(), new Deadline(deadlineSplit[0], deadlineSplit[1]));
                             } else if (instruction.equals("event")) {
                                 validateInstr2(inputArr, "I need a description to help you keep track ;-;");
                                 String[] eventSplit = inputArr[1].split(" /from | /to ");
-                                tasks[taskCount] = new Event(eventSplit[0], eventSplit[1], eventSplit[2]);
+                                tasks.add(tasks.size(), new Event(eventSplit[0], eventSplit[1], eventSplit[2]));
                             } else {
                                 throw new EngulfyErrors("I AM SO SORRY!! But this is not something I am capable of doing for now ;-;");
                             }
-                            System.out.println("Got it. I've added this task:\n    " + tasks[taskCount]);
-                            taskCount++;
+                            System.out.println("Got it. I've added this task:\n    " + tasks.get(tasks.size() - 1));
                             String task_form = "task";
-                            if (taskCount > 1) {
+                            if (tasks.size() > 1) {
                                 task_form = "tasks";
                             }
-                            System.out.printf("Now you have %d %s in the list.\n", taskCount, task_form);
+                            System.out.printf("Now you have %d %s in the list.\n", tasks.size() , task_form);
                         } catch (EngulfyErrors e) {
                             System.out.println(e.getMessage());
                         }
