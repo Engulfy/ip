@@ -120,13 +120,14 @@ public class Engulfy {
                             } else {
                                 throw new EngulfyErrors("I AM SO SORRY!! But this is not something I am capable of doing for now ;-;");
                             }
-                            saveTasksToFile(tasks);
+
                             System.out.println("Got it. I've added this task:\n    " + tasks.get(tasks.size() - 1));
                             String task_form = "task";
                             if (tasks.size() > 1) {
                                 task_form = "tasks";
                             }
                             System.out.printf("Now you have %d %s in the list.\n", tasks.size() , task_form);
+                            saveTasksToFile(tasks);
                         } catch (EngulfyErrors e) {
                             System.out.println(e.getMessage());
                         }
@@ -186,6 +187,7 @@ public class Engulfy {
                 int byIndex = line.lastIndexOf("(by: ");
                 String description = line.substring(7, byIndex - 1);
                 String by = line.substring(byIndex + 5, line.length() - 1);
+                // Parse deadline in the correct format
                 Deadline task = new Deadline(description, by);
                 if (isDone) {
                     task.markAsDone();
