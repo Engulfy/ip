@@ -1,14 +1,30 @@
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Engulfy {
+    private static final String FILE_PATH = "data/Engulfy.txt";
+    private static final String DIRECTORY_PATH = "data";
+
     public static void main(String[] args) {
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Engulfy");
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = loadTasksFromFile();
+
+        if (!tasks.isEmpty()) {
+            System.out.println("Here are your saved tasks:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println("    " + (i + 1) + ". " + tasks.get(i));
+            }
+        } else {
+            System.out.println("No saved tasks yet!");
+        }
 
         while (true) {
             String userInput = sc.nextLine();
@@ -24,6 +40,7 @@ public class Engulfy {
                         System.out.println("Bye. Hope to see you again soon!");
                         System.out.println("____________________________________________________________");
                         sc.close();
+                        saveTasksToFile(tasks);
                         return;
 
                     case "list":
@@ -46,6 +63,7 @@ public class Engulfy {
                                 Task removedTask = tasks.remove(deleteIndex - 1);
                                 System.out.println("Noted. I've removed this task:\n    " + removedTask);
                                 System.out.printf("Now you have %d %s in the list.%n", tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+                                saveTasksToFile(tasks);
                             } else {
                                 throw new EngulfyErrors("Your task number is not in my database to be deleted! try again :D");
                             }
@@ -61,6 +79,7 @@ public class Engulfy {
                                 tasks.get(taskNumber - 1).markAsDone();
                                 System.out.println("Nice! I've marked this task as done:");
                                 System.out.println("    " + tasks.get(taskNumber - 1));
+                                saveTasksToFile(tasks);
                             } else {
                                 throw new EngulfyErrors("Your task number is a little TOOOO big or small! try again :D");
                             }
@@ -76,6 +95,7 @@ public class Engulfy {
                                 tasks.get(taskNumber - 1).markAsNotDone();
                                 System.out.println("OK, I've marked this task as not done yet:");
                                 System.out.println("    " + tasks.get(taskNumber - 1));
+                                saveTasksToFile(tasks);
                             } else {
                                 throw new EngulfyErrors("Your task number is a little TOOOO big or small! try again :D");
                             }
@@ -100,6 +120,7 @@ public class Engulfy {
                             } else {
                                 throw new EngulfyErrors("I AM SO SORRY!! But this is not something I am capable of doing for now ;-;");
                             }
+                            saveTasksToFile(tasks);
                             System.out.println("Got it. I've added this task:\n    " + tasks.get(tasks.size() - 1));
                             String task_form = "task";
                             if (tasks.size() > 1) {
@@ -113,6 +134,91 @@ public class Engulfy {
             } catch (EngulfyErrors e) {
                 System.out.println("OOPS! " + e.getMessage());
             }
+        }
+    }
+
+    private static ArrayList<Task> loadTasksFromFile() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            File file = new File(FILE_PATH);
+            File directory = new File(DIRECTORY_PATH);
+
+            if (!directory.exists() && !directory.mkdirs()) {
+                System.out.println("Error: Failed to create directory " + DIRECTORY_PATH);
+                return tasks;
+            }
+
+            if (!file.exists()) {
+                if (file.createNewFile()) {
+                    System.out.println("File created: " + FILE_PATH);
+                }
+                return tasks;
+            }
+
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                Task task = parseTaskFromString(line);
+                if (task != null) {
+                    tasks.add(task);
+                }
+            }
+            fileScanner.close();
+        } catch (IOException e) {
+            System.out.println("Error loading tasks: " + e.getMessage());
+        }
+        return tasks;
+    }
+
+    private static Task parseTaskFromString(String line) {
+        try {
+            char type = line.charAt(1);
+            boolean isDone = line.charAt(4) == 'X';
+
+            if (type == 'T') {
+                String description = line.substring(7);
+                Todo task = new Todo(description);
+                if (isDone) {
+                    task.markAsDone();
+                }
+                return task;
+            } else if (type == 'D') {
+                int byIndex = line.lastIndexOf("(by: ");
+                String description = line.substring(7, byIndex - 1);
+                String by = line.substring(byIndex + 5, line.length() - 1);
+                Deadline task = new Deadline(description, by);
+                if (isDone) {
+                    task.markAsDone();
+                }
+                return task;
+            } else if (type == 'E') {
+                int fromIndex = line.indexOf("(from: ");
+                int toIndex = line.indexOf(" to: ");
+                String description = line.substring(7, fromIndex - 1);
+                String from = line.substring(fromIndex + 7, toIndex);
+                String to = line.substring(toIndex + 5, line.length() - 1);
+                Event task = new Event(description, from, to);
+                if (isDone) {
+                    task.markAsDone();
+                }
+                return task;
+            }
+        } catch (Exception e) {
+            System.out.println("Error parsing task: " + line);
+        }
+        return null;
+    }
+
+    private static void saveTasksToFile(List<Task> tasks) {
+        try {
+            FileWriter writer = new FileWriter(FILE_PATH, false);
+            for (Task task : tasks) {
+                writer.write(task.toString() + "\n");
+            }
+            writer.close();
+            System.out.println("Tasks saved successfully!");
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
         }
     }
 
