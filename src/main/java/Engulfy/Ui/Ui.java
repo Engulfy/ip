@@ -1,14 +1,14 @@
-package Engulfy.UI;
+package Engulfy.Ui;
 
 import Engulfy.Task.Task;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class UI {
+public class Ui {
     private Scanner scanner;
 
-    public UI() {
+    public Ui() {
         scanner = new Scanner(System.in);
     }
 
@@ -64,13 +64,13 @@ public class UI {
         System.out.println("____________________________________________________________");
     }
 
-    public void showMarkResult(Task task) {
+    public void showTaskMark(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("    " + task);
         System.out.println("____________________________________________________________");
     }
 
-    public void showUnmarkResult(Task task) {
+    public void showTaskUnmark(Task task) {
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println("    " + task);
         System.out.println("____________________________________________________________");

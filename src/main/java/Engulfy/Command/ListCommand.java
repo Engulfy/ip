@@ -2,10 +2,10 @@ package Engulfy.Command;
 
 import Engulfy.Storage.Storage;
 import Engulfy.Task.TaskList;
-import Engulfy.UI.UI;
+import Engulfy.Ui.Ui;
 
 public class ListCommand implements Command {
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (!tasks.isEmpty()) {
             ui.showTaskList(tasks.getAllTasks());
         } else {

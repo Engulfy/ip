@@ -1,19 +1,19 @@
 package Engulfy.Command;
 
-import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Error.EngulfyError;
 import Engulfy.Parser.Parser;
 import Engulfy.Storage.Storage;
 import Engulfy.Task.TaskList;
-import Engulfy.UI.UI;
+import Engulfy.Ui.Ui;
 
 public class Engulfy {
     private final Storage storage;
     private TaskList tasks;
-    private final UI ui;
+    private final Ui ui;
     private final Parser parser;
 
     public Engulfy() {
-        ui = new UI();
+        ui = new Ui();
         storage = new Storage();
         parser = new Parser();
     }
@@ -22,7 +22,7 @@ public class Engulfy {
         ui.showWelcome();
         try {
             tasks = new TaskList(storage.load());
-        } catch (EngulfyErrors e) {
+        } catch (EngulfyError e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -39,7 +39,7 @@ public class Engulfy {
                 Command command = parser.parse(fullCommand);
                 command.execute(tasks, ui, storage);
                 isExit = command.isExit();
-            } catch (EngulfyErrors e) {
+            } catch (EngulfyError e) {
                 ui.showError(e.getMessage());
             }
         }

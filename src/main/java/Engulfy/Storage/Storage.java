@@ -1,7 +1,11 @@
 package Engulfy.Storage;
 
-import Engulfy.Errors.EngulfyErrors;
-import Engulfy.Task.*;
+import Engulfy.Error.EngulfyError;
+import Engulfy.Task.Deadline;
+import Engulfy.Task.Event;
+import Engulfy.Task.Task;
+import Engulfy.Task.TaskList;
+import Engulfy.Task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -17,7 +21,7 @@ public class Storage {
     public Storage() {
     }
 
-    public List<Task> load() throws EngulfyErrors {
+    public List<Task> load() throws EngulfyError {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(FILE_PATH);
@@ -50,7 +54,7 @@ public class Storage {
         return tasks;
     }
 
-    public void save(TaskList tasks) throws EngulfyErrors {
+    public void save(TaskList tasks) throws EngulfyError {
         try {
             FileWriter writer = new FileWriter(FILE_PATH, false);
             for (Task task : tasks.getAllTasks()) {
@@ -58,7 +62,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            throw new EngulfyErrors("Error saving tasks: " + e.getMessage());
+            throw new EngulfyError("Error saving tasks: " + e.getMessage());
         }
     }
 

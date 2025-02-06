@@ -1,6 +1,6 @@
 package Engulfy.Task;
 
-import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Error.EngulfyError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,31 +20,31 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public Task deleteTask(int index) throws EngulfyErrors {
+    public Task deleteTask(int index) throws EngulfyError {
         try {
             return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new EngulfyErrors("Your task number is not in my database to be deleted! try again :D");
+            throw new EngulfyError("Your task number is not in my database to be deleted! try again :D");
         }
     }
 
-    public Task markTask(int index) throws EngulfyErrors {
+    public Task markTask(int index) throws EngulfyError {
         try {
             Task task = tasks.get(index - 1);
             task.markAsDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new EngulfyErrors("Your task number is a little TOOOO big or small! try again :D");
+            throw new EngulfyError("Your task number is a little TOOOO big or small! try again :D");
         }
     }
 
-    public Task unmarkTask(int index) throws EngulfyErrors {
+    public Task unmarkTask(int index) throws EngulfyError {
         try {
             Task task = tasks.get(index - 1);
             task.markAsNotDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new EngulfyErrors("Your task number is a little TOOOO big or small! try again :D");
+            throw new EngulfyError("Your task number is a little TOOOO big or small! try again :D");
         }
     }
 

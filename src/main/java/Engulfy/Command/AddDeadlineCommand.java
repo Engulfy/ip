@@ -1,16 +1,16 @@
 package Engulfy.Command;
 
-import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Error.EngulfyError;
 import Engulfy.Task.Deadline;
 
 public class AddDeadlineCommand extends AddCommand {
-    public AddDeadlineCommand(String arguments) throws EngulfyErrors {
+    public AddDeadlineCommand(String arguments) throws EngulfyError {
         if (arguments.isEmpty()) {
-            throw new EngulfyErrors("I need a description to help you keep track ;-;");
+            throw new EngulfyError("I need a description to help you keep track ;-;");
         }
         String[] parts = arguments.split(" /by ", 2);
         if (parts.length < 2) {
-            throw new EngulfyErrors("Invalid deadline format! Use: deadline <description> /by <datetime>");
+            throw new EngulfyError("Invalid deadline format! Use: deadline <description> /by <datetime>");
         }
         this.task = new Deadline(parts[0], parts[1]);
     }

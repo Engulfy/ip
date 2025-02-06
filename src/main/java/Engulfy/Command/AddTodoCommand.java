@@ -1,6 +1,6 @@
 package Engulfy.Command;
 
-import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Error.EngulfyErrors;
 import Engulfy.Task.Todo;
 
 public class AddTodoCommand extends AddCommand {

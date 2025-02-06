@@ -2,10 +2,10 @@ package Engulfy.Command;
 
 import Engulfy.Task.TaskList;
 import Engulfy.Storage.Storage;
-import Engulfy.UI.UI;
-import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Ui.Ui;
+import Engulfy.Error.EngulfyError;
 
 public interface Command {
-    void execute(TaskList tasks, UI ui, Storage storage) throws EngulfyErrors;
+    void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError;
     boolean isExit();
 }

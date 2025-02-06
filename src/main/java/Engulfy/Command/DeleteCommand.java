@@ -1,23 +1,23 @@
 package Engulfy.Command;
 
-import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Error.EngulfyError;
 import Engulfy.Storage.Storage;
 import Engulfy.Task.Task;
 import Engulfy.Task.TaskList;
-import Engulfy.UI.UI;
+import Engulfy.Ui.Ui;
 
 public class DeleteCommand implements Command {
     private int index;
 
-    public DeleteCommand(String arguments) throws EngulfyErrors {
+    public DeleteCommand(String arguments) throws EngulfyError {
         try {
             this.index = Integer.parseInt(arguments);
         } catch (NumberFormatException e) {
-            throw new EngulfyErrors("Please specify a valid task number to delete");
+            throw new EngulfyError("Please specify a valid task number to delete");
         }
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) throws EngulfyErrors {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
         Task removedTask = tasks.deleteTask(index);
         storage.save(tasks);
         ui.showTaskRemoved(removedTask, tasks.size());
