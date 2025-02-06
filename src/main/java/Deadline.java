@@ -1,5 +1,4 @@
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
@@ -30,7 +29,4 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")) + ")";
     }
 
-    public String toFileString() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-    }
 }
