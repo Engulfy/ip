@@ -1,3 +1,8 @@
+package Engulfy.Parser;
+
+import Engulfy.Command.*;
+import Engulfy.Errors.EngulfyErrors;
+
 public class Parser {
     public Command parse(String fullCommand) throws EngulfyErrors {
         String[] parts = fullCommand.split(" ", 2);

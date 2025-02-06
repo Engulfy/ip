@@ -1,3 +1,7 @@
+package Engulfy.Task;
+
+import Engulfy.Errors.EngulfyErrors;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +20,7 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public Task deleteTask(int index) throws EngulfyErrors{
+    public Task deleteTask(int index) throws EngulfyErrors {
         try {
             return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {

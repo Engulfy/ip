@@ -1,7 +1,9 @@
+package Engulfy.Task;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 

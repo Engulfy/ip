@@ -1,3 +1,11 @@
+package Engulfy.Command;
+
+import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Storage.Storage;
+import Engulfy.Task.Task;
+import Engulfy.Task.TaskList;
+import Engulfy.UI.UI;
+
 public abstract class AddCommand implements Command {
     protected Task task;
 

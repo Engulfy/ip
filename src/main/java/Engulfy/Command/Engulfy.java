@@ -1,3 +1,11 @@
+package Engulfy.Command;
+
+import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Parser.Parser;
+import Engulfy.Storage.Storage;
+import Engulfy.Task.TaskList;
+import Engulfy.UI.UI;
+
 public class Engulfy {
     private final Storage storage;
     private TaskList tasks;

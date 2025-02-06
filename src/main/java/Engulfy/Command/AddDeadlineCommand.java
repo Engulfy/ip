@@ -1,3 +1,8 @@
+package Engulfy.Command;
+
+import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Task.Deadline;
+
 public class AddDeadlineCommand extends AddCommand {
     public AddDeadlineCommand(String arguments) throws EngulfyErrors {
         if (arguments.isEmpty()) {

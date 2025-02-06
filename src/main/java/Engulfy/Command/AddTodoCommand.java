@@ -1,3 +1,8 @@
+package Engulfy.Command;
+
+import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Task.Todo;
+
 public class AddTodoCommand extends AddCommand {
     public AddTodoCommand(String arguments) throws EngulfyErrors {
         if (arguments.isEmpty()) {

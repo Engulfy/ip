@@ -1,3 +1,7 @@
+package Engulfy.UI;
+
+import Engulfy.Task.Task;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +14,7 @@ public class UI {
 
     public void showWelcome() {
         System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Engulfy");
+        System.out.println("Hello! I'm Engulfy.Command.Engulfy");
         System.out.println("What can I do for you?");
     }
 

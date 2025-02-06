@@ -1,3 +1,8 @@
+package Engulfy.Storage;
+
+import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

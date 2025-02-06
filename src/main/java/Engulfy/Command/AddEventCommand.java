@@ -1,3 +1,8 @@
+package Engulfy.Command;
+
+import Engulfy.Errors.EngulfyErrors;
+import Engulfy.Task.Event;
+
 public class AddEventCommand extends AddCommand {
     public AddEventCommand(String arguments) throws EngulfyErrors {
         if (arguments.isEmpty()) {
