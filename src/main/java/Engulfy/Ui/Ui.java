@@ -65,14 +65,16 @@ public class Ui {
     }
 
     public void showTaskMark(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("    " + task);
-        System.out.println("____________________________________________________________");
+        String taskString = task.toString().trim();
+        System.out.print("Nice! I've marked this task as done:\n" +
+                "    " + taskString + "\n" +
+                "____________________________________________________________\n");
     }
 
     public void showTaskUnmark(Task task) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println("    " + task);
-        System.out.println("____________________________________________________________");
+        String taskString = task.toString().trim();
+        System.out.print("OK, I've marked this task as not done yet:\n" +
+                "    " + taskString + "\n" +
+                "____________________________________________________________\n");
     }
 }
