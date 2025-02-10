@@ -1,6 +1,6 @@
-package Engulfy.Task;
+package engulfy.task;
 
-import Engulfy.Error.EngulfyError;
+import engulfy.error.EngulfyError;
 
 import java.util.ArrayList;
 import java.util.List;

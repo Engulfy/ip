@@ -1,10 +1,10 @@
-package Engulfy.Command;
+package engulfy.command;
 
-import Engulfy.Error.EngulfyError;
-import Engulfy.Storage.Storage;
-import Engulfy.Task.Task;
-import Engulfy.Task.TaskList;
-import Engulfy.Ui.Ui;
+import engulfy.error.EngulfyError;
+import engulfy.storage.Storage;
+import engulfy.task.Task;
+import engulfy.task.TaskList;
+import engulfy.ui.Ui;
 
 public class DeleteCommand implements Command {
     private int index;

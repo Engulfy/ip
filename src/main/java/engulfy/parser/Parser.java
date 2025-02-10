@@ -1,15 +1,16 @@
-package Engulfy.Parser;
+package engulfy.parser;
 
-import Engulfy.Command.AddDeadlineCommand;
-import Engulfy.Command.AddEventCommand;
-import Engulfy.Command.AddTodoCommand;
-import Engulfy.Command.Command;
-import Engulfy.Command.DeleteCommand;
-import Engulfy.Command.ExitCommand;
-import Engulfy.Command.ListCommand;
-import Engulfy.Command.MarkCommand;
-import Engulfy.Command.UnmarkCommand;
-import Engulfy.Error.EngulfyError;
+import engulfy.command.AddDeadlineCommand;
+import engulfy.command.AddEventCommand;
+import engulfy.command.AddTodoCommand;
+import engulfy.command.Command;
+import engulfy.command.DeleteCommand;
+import engulfy.command.ExitCommand;
+import engulfy.command.FindCommand;
+import engulfy.command.ListCommand;
+import engulfy.command.MarkCommand;
+import engulfy.command.UnmarkCommand;
+import engulfy.error.EngulfyError;
 
 public class Parser {
     public Command parse(String fullCommand) throws EngulfyError {
@@ -34,6 +35,8 @@ public class Parser {
                 return new AddDeadlineCommand(arguments);
             case "event":
                 return new AddEventCommand(arguments);
+            case "find":
+                return new FindCommand(arguments);
             default:
                 throw new EngulfyError("I AM SO SORRY!! But this is not something I am capable of doing for now ;-;");
         }

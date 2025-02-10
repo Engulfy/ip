@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClass.set("Engulfy.Ui")
+    mainClass.set("engulfy.ui")
 }
 
 shadowJar {

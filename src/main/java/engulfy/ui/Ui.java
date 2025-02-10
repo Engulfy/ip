@@ -1,6 +1,6 @@
-package Engulfy.Ui;
+package engulfy.ui;
 
-import Engulfy.Task.Task;
+import engulfy.task.Task;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +14,7 @@ public class Ui {
 
     public void showWelcome() {
         System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Engulfy.Command.Engulfy");
+        System.out.println("Hello! I'm Engulfy.command.Engulfy");
         System.out.println("What can I do for you?");
     }
 
@@ -46,7 +46,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("Error loading tasks from file. Starting with empty list.");
+        System.out.println("error loading tasks from file. Starting with empty list.");
         System.out.println("____________________________________________________________");
     }
 

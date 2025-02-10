@@ -1,4 +1,4 @@
-package Engulfy.Command;
+package engulfy.command;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -9,12 +9,12 @@ import java.nio.file.Files;
 
 import java.util.List;
 
-import Engulfy.Error.EngulfyError;
-import Engulfy.Storage.Storage;
-import Engulfy.Task.Task;
-import Engulfy.Task.TaskList;
-import Engulfy.Task.Todo;
-import Engulfy.Ui.Ui;
+import engulfy.error.EngulfyError;
+import engulfy.storage.Storage;
+import engulfy.task.Task;
+import engulfy.task.TaskList;
+import engulfy.task.Todo;
+import engulfy.ui.Ui;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ class MarkCommandTest {
         // Redirect System.out to capture console output
         System.setOut(new PrintStream(outContent));
 
-        // Create a temporary file for Storage
+        // Create a temporary file for storage
         tempFile = Files.createTempFile("test", ".txt").toFile();
         tempFile.deleteOnExit();
 
@@ -56,15 +56,15 @@ class MarkCommandTest {
                         writer.write(task.toString() + "\n");
                     }
                 } catch (IOException e) {
-                    throw new EngulfyError("Error saving tasks: " + e.getMessage());
+                    throw new EngulfyError("error saving tasks: " + e.getMessage());
                 }
             }
         };
 
         // Add some tasks to the TaskList
-        taskList.addTask(new Todo("Task 1"));
-        taskList.addTask(new Todo("Task 2"));
-        taskList.addTask(new Todo("Task 3"));
+        taskList.addTask(new Todo("task 1"));
+        taskList.addTask(new Todo("task 2"));
+        taskList.addTask(new Todo("task 3"));
     }
 
     @AfterEach

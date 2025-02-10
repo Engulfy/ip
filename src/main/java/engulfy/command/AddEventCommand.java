@@ -1,7 +1,7 @@
-package Engulfy.Command;
+package engulfy.command;
 
-import Engulfy.Error.EngulfyError;
-import Engulfy.Task.Event;
+import engulfy.error.EngulfyError;
+import engulfy.task.Event;
 
 public class AddEventCommand extends AddCommand {
     public AddEventCommand(String arguments) throws EngulfyError {

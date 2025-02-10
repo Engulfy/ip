@@ -1,4 +1,4 @@
-package Engulfy.Error;
+package engulfy.error;
 
 public class EngulfyError extends Exception{
     public EngulfyError(String message){

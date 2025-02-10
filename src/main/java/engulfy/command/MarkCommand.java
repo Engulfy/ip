@@ -1,10 +1,10 @@
-package Engulfy.Command;
+package engulfy.command;
 
-import Engulfy.Error.EngulfyError;
-import Engulfy.Task.Task;
-import Engulfy.Task.TaskList;
-import Engulfy.Storage.Storage;
-import Engulfy.Ui.Ui;
+import engulfy.error.EngulfyError;
+import engulfy.task.Task;
+import engulfy.task.TaskList;
+import engulfy.storage.Storage;
+import engulfy.ui.Ui;
 
 public class MarkCommand implements Command {
     private int index;
