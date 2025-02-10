@@ -27,6 +27,7 @@ public class DeleteCommand implements Command {
         }
     }
 
+    @Override
     /**
      * Executes the command, deleting the task at the specified index, saving the updated task list,
      * and displaying the updated UI.
@@ -42,6 +43,7 @@ public class DeleteCommand implements Command {
         ui.showTaskRemoved(removedTask, tasks.size());
     }
 
+    @Override
     /**
      * Checks if the command results in an exit action.
      *

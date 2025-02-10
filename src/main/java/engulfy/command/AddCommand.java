@@ -12,8 +12,9 @@ import engulfy.ui.Ui;
  * the execution logic for adding a task to the task list.
  */
 public abstract class AddCommand implements Command {
-    protected Task task;
+    private Task task;
 
+    @Override
     /**
      * Executes the add command by adding a task to the task list,
      * saving the updated list to storage, and displaying a confirmation message.
@@ -29,6 +30,15 @@ public abstract class AddCommand implements Command {
         ui.showTaskAdded(task, tasks.size());
     }
 
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    @Override
     /**
      * Indicates whether this command causes the application to exit.
      *

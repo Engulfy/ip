@@ -1,15 +1,15 @@
 package engulfy.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The Event class represents a task with a start and end time.
  * It extends the Task class and includes two specific LocalDateTime objects, 'from' and 'to'.
  */
 public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     /**
      * Constructs an Event task with the given description, start time, and end time.

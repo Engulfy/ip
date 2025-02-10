@@ -18,6 +18,7 @@ public class AddTodoCommand extends AddCommand {
         if (arguments.isEmpty()) {
             throw new EngulfyError("I need a description to help you keep track ;-;");
         }
-        this.task = new Todo(arguments);
+
+        setTask(new Todo(arguments));
     }
 }

@@ -9,6 +9,7 @@ import engulfy.ui.Ui;
  * This command displays a goodbye message and indicates that the application should terminate.
  */
 public class ExitCommand implements Command {
+    @Override
     /**
      * Executes the exit command by displaying a goodbye message via the UI.
      *
@@ -20,6 +21,7 @@ public class ExitCommand implements Command {
         ui.showGoodbye();
     }
 
+    @Override
     /**
      * Checks if the command results in an exit action.
      *

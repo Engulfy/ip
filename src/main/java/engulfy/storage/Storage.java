@@ -62,10 +62,12 @@ public class Storage {
                     tasks.add(task);
                 }
             }
+
             fileScanner.close();
         } catch (IOException e) {
             System.out.println("error loading tasks: " + e.getMessage());
         }
+
         return tasks;
     }
 
@@ -82,6 +84,7 @@ public class Storage {
             for (Task task : tasks.getAllTasks()) {
                 writer.write(task.toString() + "\n");
             }
+
             writer.close();
         } catch (IOException e) {
             throw new EngulfyError("error saving tasks: " + e.getMessage());
@@ -125,11 +128,13 @@ public class Storage {
                 if (isDone) {
                     task.markAsDone();
                 }
+
                 return task;
             }
         } catch (Exception e) {
             System.out.println("error parsing task: " + line);
         }
+
         return null;
     }
 }

@@ -36,6 +36,7 @@ public class UnmarkCommand implements Command {
      * @param storage the storage to persist the updated task list
      * @throws EngulfyError if an error occurs during task unmarking or saving process
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
         Task task = tasks.unmarkTask(index);
         storage.save(tasks);
@@ -47,6 +48,7 @@ public class UnmarkCommand implements Command {
      *
      * @return false since this command does not exit the application
      */
+    @Override
     public boolean isExit() {
         return false;
     }

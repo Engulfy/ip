@@ -1,14 +1,14 @@
 package engulfy.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The Deadline class represents a task with a deadline.
  * It extends the Task class and includes a specific deadline date and time.
  */
 public class Deadline extends Task {
-    protected LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
     /**
      * Constructs a Deadline task with the given description and deadline.

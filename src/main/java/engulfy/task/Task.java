@@ -5,7 +5,7 @@ package engulfy.task;
  * It provides methods to mark the task as done or not done, and to retrieve its status.
  */
 public class Task {
-    protected String description;
+    private final String description;
     private boolean isDone;
 
     /**
