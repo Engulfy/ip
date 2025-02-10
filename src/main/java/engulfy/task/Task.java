@@ -41,8 +41,13 @@ public class Task {
         isDone = false;
     }
 
+    /**
+     * Retrieves the description of the task.
+     */
     public String getDescription() {
         return this.description;
+    }
+
     /**
      * Returns the task's completion status.
      *

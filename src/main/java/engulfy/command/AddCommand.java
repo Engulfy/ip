@@ -14,7 +14,6 @@ import engulfy.ui.Ui;
 public abstract class AddCommand implements Command {
     private Task task;
 
-    @Override
     /**
      * Executes the add command by adding a task to the task list,
      * saving the updated list to storage, and displaying a confirmation message.
@@ -24,6 +23,7 @@ public abstract class AddCommand implements Command {
      * @param storage The storage handler for saving task data.
      * @throws EngulfyError If an error occurs while saving the task.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
         tasks.addTask(task);
         storage.save(tasks);
@@ -38,12 +38,12 @@ public abstract class AddCommand implements Command {
         this.task = task;
     }
 
-    @Override
     /**
      * Indicates whether this command causes the application to exit.
      *
      * @return false, as adding a task does not terminate the application.
      */
+    @Override
     public boolean isExit() {
         return false;
     }
