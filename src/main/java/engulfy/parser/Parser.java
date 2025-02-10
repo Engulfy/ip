@@ -6,6 +6,7 @@ import engulfy.command.AddTodoCommand;
 import engulfy.command.Command;
 import engulfy.command.DeleteCommand;
 import engulfy.command.ExitCommand;
+import engulfy.command.FindCommand;
 import engulfy.command.ListCommand;
 import engulfy.command.MarkCommand;
 import engulfy.command.UnmarkCommand;
@@ -37,6 +38,7 @@ public class Parser {
             case "todo" -> new AddTodoCommand(arguments);
             case "deadline" -> new AddDeadlineCommand(arguments);
             case "event" -> new AddEventCommand(arguments);
+            case "find" -> new FindCommand(arguments);
             default ->
                     throw new EngulfyError("I AM SO SORRY!! But this is not something I am capable of doing for now ;-;");
         };

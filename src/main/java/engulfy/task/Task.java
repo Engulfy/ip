@@ -41,6 +41,8 @@ public class Task {
         isDone = false;
     }
 
+    public String getDescription() {
+        return this.description;
     /**
      * Returns the task's completion status.
      *
