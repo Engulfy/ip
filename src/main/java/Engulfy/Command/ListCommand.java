@@ -5,6 +5,7 @@ import Engulfy.Task.TaskList;
 import Engulfy.Ui.Ui;
 
 public class ListCommand implements Command {
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (!tasks.isEmpty()) {
             ui.showTaskList(tasks.getAllTasks());
@@ -14,6 +15,7 @@ public class ListCommand implements Command {
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

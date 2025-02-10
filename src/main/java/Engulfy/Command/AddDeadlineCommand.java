@@ -8,10 +8,12 @@ public class AddDeadlineCommand extends AddCommand {
         if (arguments.isEmpty()) {
             throw new EngulfyError("I need a description to help you keep track ;-;");
         }
+
         String[] parts = arguments.split(" /by ", 2);
         if (parts.length < 2) {
             throw new EngulfyError("Invalid deadline format! Use: deadline <description> /by <datetime>");
         }
-        this.task = new Deadline(parts[0], parts[1]);
+
+        setTask(new Deadline(parts[0], parts[1]));
     }
 }

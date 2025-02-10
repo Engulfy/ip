@@ -7,7 +7,7 @@ import Engulfy.Task.TaskList;
 import Engulfy.Ui.Ui;
 
 public class DeleteCommand implements Command {
-    private int index;
+    private final int index;
 
     public DeleteCommand(String arguments) throws EngulfyError {
         try {
@@ -17,12 +17,14 @@ public class DeleteCommand implements Command {
         }
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
         Task removedTask = tasks.deleteTask(index);
         storage.save(tasks);
         ui.showTaskRemoved(removedTask, tasks.size());
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

@@ -7,7 +7,7 @@ import Engulfy.Storage.Storage;
 import Engulfy.Ui.Ui;
 
 public class MarkCommand implements Command {
-    private int index;
+    private final int index;
 
     public MarkCommand(String arguments) throws EngulfyError {
         try {
@@ -17,12 +17,14 @@ public class MarkCommand implements Command {
         }
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
         Task task = tasks.markTask(index);
         storage.save(tasks);
         ui.showTaskMark(task);
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

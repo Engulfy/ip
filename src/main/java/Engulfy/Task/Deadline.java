@@ -1,10 +1,10 @@
 package Engulfy.Task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
     public Deadline(String description, String deadline) {
         super(description);

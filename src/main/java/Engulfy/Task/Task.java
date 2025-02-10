@@ -1,7 +1,7 @@
 package Engulfy.Task;
 
 public class Task {
-    protected String description;
+    private final String description;
     public boolean isDone;
 
     public Task(String description) {

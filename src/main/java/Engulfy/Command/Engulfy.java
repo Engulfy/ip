@@ -8,7 +8,6 @@ import Engulfy.Ui.Ui;
 
 public class Engulfy {
     private final Storage storage;
-    private TaskList tasks;
     private final Ui ui;
     private final Parser parser;
 
@@ -20,6 +19,7 @@ public class Engulfy {
 
     public void run() {
         ui.showWelcome();
+        TaskList tasks;
         try {
             tasks = new TaskList(storage.load());
         } catch (EngulfyError e) {
