@@ -36,7 +36,7 @@ class MarkCommandTest {
         // Redirect System.out to capture console output
         System.setOut(new PrintStream(outContent));
 
-        // Create a temporary file for Storage
+        // Create a temporary file for storage
         tempFile = Files.createTempFile("test", ".txt").toFile();
         tempFile.deleteOnExit();
 
@@ -56,15 +56,15 @@ class MarkCommandTest {
                         writer.write(task.toString() + "\n");
                     }
                 } catch (IOException e) {
-                    throw new EngulfyError("Error saving tasks: " + e.getMessage());
+                    throw new EngulfyError("error saving tasks: " + e.getMessage());
                 }
             }
         };
 
         // Add some tasks to the TaskList
-        taskList.addTask(new Todo("Task 1"));
-        taskList.addTask(new Todo("Task 2"));
-        taskList.addTask(new Todo("Task 3"));
+        taskList.addTask(new Todo("task 1"));
+        taskList.addTask(new Todo("task 2"));
+        taskList.addTask(new Todo("task 3"));
     }
 
     @AfterEach

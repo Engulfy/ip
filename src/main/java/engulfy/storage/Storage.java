@@ -28,7 +28,7 @@ public class Storage {
             File directory = new File(DIRECTORY_PATH);
 
             if (!directory.exists() && !directory.mkdirs()) {
-                System.out.println("Error: Failed to create directory " + DIRECTORY_PATH);
+                System.out.println("error: Failed to create directory " + DIRECTORY_PATH);
                 return tasks;
             }
 
@@ -50,7 +50,7 @@ public class Storage {
 
             fileScanner.close();
         } catch (IOException e) {
-            System.out.println("Error loading tasks: " + e.getMessage());
+            System.out.println("error loading tasks: " + e.getMessage());
         }
 
         return tasks;
@@ -65,7 +65,7 @@ public class Storage {
 
             writer.close();
         } catch (IOException e) {
-            throw new EngulfyError("Error saving tasks: " + e.getMessage());
+            throw new EngulfyError("error saving tasks: " + e.getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ public class Storage {
                 return task;
             }
         } catch (Exception e) {
-            System.out.println("Error parsing task: " + line);
+            System.out.println("error parsing task: " + line);
         }
 
         return null;
