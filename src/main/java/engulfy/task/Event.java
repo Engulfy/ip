@@ -1,0 +1,61 @@
+package engulfy.task;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
+/**
+ * The Event class represents a task with a start and end time.
+ * It extends the Task class and includes two specific LocalDateTime objects, 'from' and 'to'.
+ */
+public class Event extends Task {
+    protected LocalDateTime from;
+    protected LocalDateTime to;
+
+    /**
+     * Constructs an Event task with the given description, start time, and end time.
+     *
+     * @param description the description of the event
+     * @param from the start time in a string format (either "M/d/yyyy HHmm" or "MMM dd yyyy, h:mm a")
+     * @param to the end time in a string format (either "M/d/yyyy HHmm" or "MMM dd yyyy, h:mm a")
+     * @throws IllegalArgumentException if the start or end time format is invalid
+     */
+    public Event(String description, String from, String to) {
+        super(description);
+        this.from = tryParseDateTime(from);
+        this.to = tryParseDateTime(to);
+    }
+
+    /**
+     * Attempts to parse a string representing a date-time into a LocalDateTime object.
+     * It tries two formats: "M/d/yyyy HHmm" and "MMM dd yyyy, h:mm a".
+     *
+     * @param dateTime the string representing the date-time
+     * @return a LocalDateTime object representing the parsed date-time
+     * @throws IllegalArgumentException if the date-time format is invalid
+     */
+    private LocalDateTime tryParseDateTime(String dateTime) {
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("M/d/yyyy HHmm");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
+
+        try {
+            return LocalDateTime.parse(dateTime, formatter1);
+        } catch (Exception e1) {
+            try {
+                return LocalDateTime.parse(dateTime, formatter2);
+            } catch (Exception e2) {
+                throw new IllegalArgumentException("Are you sure you are in the correct timezone?: " + dateTime);
+            }
+        }
+    }
+
+    /**
+     * Returns the string representation of the Event task, including the description,
+     * start time, and end time in a formatted string.
+     *
+     * @return a string representation of the Event task
+     */
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")) + " to: " + to.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")) + ")";
+    }
+}

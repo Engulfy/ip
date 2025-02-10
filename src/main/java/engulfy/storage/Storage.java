@@ -1,11 +1,11 @@
-package Engulfy.Storage;
+package engulfy.storage;
 
-import Engulfy.Error.EngulfyError;
-import Engulfy.Task.Deadline;
-import Engulfy.Task.Event;
-import Engulfy.Task.Task;
-import Engulfy.Task.TaskList;
-import Engulfy.Task.Todo;
+import engulfy.error.EngulfyError;
+import engulfy.task.Deadline;
+import engulfy.task.Event;
+import engulfy.task.Task;
+import engulfy.task.TaskList;
+import engulfy.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,13 +14,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The Storage class handles loading and saving tasks to and from a file.
+ * It ensures that the task list is preserved between application sessions.
+ */
 public class Storage {
-    private static final String FILE_PATH = "data/Engulfy.txt";
+    private static final String FILE_PATH = "data/engulfy.txt";
     private static final String DIRECTORY_PATH = "data";
 
+    /**
+     * Constructs a Storage instance.
+     * Ensures that the necessary directories and files are ready for use.
+     */
     public Storage() {
     }
 
+    /**
+     * Loads tasks from the storage file and returns them as a list.
+     * If the file doesn't exist, a new file will be created.
+     *
+     * @return a list of tasks loaded from the file
+     * @throws EngulfyError if there is an error reading the file
+     */
     public List<Task> load() throws EngulfyError {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -28,7 +43,7 @@ public class Storage {
             File directory = new File(DIRECTORY_PATH);
 
             if (!directory.exists() && !directory.mkdirs()) {
-                System.out.println("Error: Failed to create directory " + DIRECTORY_PATH);
+                System.out.println("error: Failed to create directory " + DIRECTORY_PATH);
                 return tasks;
             }
 
@@ -49,11 +64,18 @@ public class Storage {
             }
             fileScanner.close();
         } catch (IOException e) {
-            System.out.println("Error loading tasks: " + e.getMessage());
+            System.out.println("error loading tasks: " + e.getMessage());
         }
         return tasks;
     }
 
+    /**
+     * Saves the given task list to the storage file.
+     * Overwrites the existing file contents with the updated tasks.
+     *
+     * @param tasks the task list to save
+     * @throws EngulfyError if there is an error writing to the file
+     */
     public void save(TaskList tasks) throws EngulfyError {
         try {
             FileWriter writer = new FileWriter(FILE_PATH, false);
@@ -62,10 +84,16 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            throw new EngulfyError("Error saving tasks: " + e.getMessage());
+            throw new EngulfyError("error saving tasks: " + e.getMessage());
         }
     }
 
+    /**
+     * Parses a task from a string representation loaded from the storage file.
+     *
+     * @param line the string representation of a task
+     * @return the corresponding Task object, or null if parsing fails
+     */
     private Task parseTaskFromString(String line) {
         try {
             char type = line.charAt(1);
@@ -100,7 +128,7 @@ public class Storage {
                 return task;
             }
         } catch (Exception e) {
-            System.out.println("Error parsing task: " + line);
+            System.out.println("error parsing task: " + line);
         }
         return null;
     }

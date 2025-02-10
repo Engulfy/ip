@@ -1,25 +1,36 @@
-package Engulfy.Command;
+package engulfy.command;
 
-import Engulfy.Error.EngulfyError;
-import Engulfy.Parser.Parser;
-import Engulfy.Storage.Storage;
-import Engulfy.Task.TaskList;
-import Engulfy.Ui.Ui;
+import engulfy.error.EngulfyError;
+import engulfy.parser.Parser;
+import engulfy.storage.Storage;
+import engulfy.task.TaskList;
+import engulfy.ui.Ui;
 
+/**
+ * The main class for the Engulfy application.
+ * It handles initialization, user interaction, and execution of commands.
+ */
 public class Engulfy {
     private final Storage storage;
-    private TaskList tasks;
     private final Ui ui;
     private final Parser parser;
 
+    /**
+     * Constructs an Engulfy instance and initializes the UI, storage, and parser.
+     */
     public Engulfy() {
         ui = new Ui();
         storage = new Storage();
         parser = new Parser();
     }
 
+    /**
+     * Runs the Engulfy application.
+     * Initializes the task list, displays the welcome message, and processes user commands.
+     */
     public void run() {
         ui.showWelcome();
+        TaskList tasks;
         try {
             tasks = new TaskList(storage.load());
         } catch (EngulfyError e) {
@@ -45,6 +56,11 @@ public class Engulfy {
         }
     }
 
+    /**
+     * The main entry point for the Engulfy application.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         new Engulfy().run();
     }

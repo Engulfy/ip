@@ -1,4 +1,4 @@
-package Engulfy.Command;
+package engulfy.command;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -9,18 +9,26 @@ import java.nio.file.Files;
 
 import java.util.List;
 
-import Engulfy.Error.EngulfyError;
-import Engulfy.Storage.Storage;
-import Engulfy.Task.Task;
-import Engulfy.Task.TaskList;
-import Engulfy.Task.Todo;
-import Engulfy.Ui.Ui;
+import engulfy.error.EngulfyError;
+import engulfy.storage.Storage;
+import engulfy.task.Task;
+import engulfy.task.TaskList;
+import engulfy.task.Todo;
+import engulfy.ui.Ui;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Unit tests for the MarkCommand class, which marks tasks as done.
+ */
 class MarkCommandTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -31,22 +39,25 @@ class MarkCommandTest {
     private Storage storage;
     private File tempFile;
 
+    /**
+     * Set up the environment for testing by initializing necessary components.
+     * Redirects System.out to capture output for testing.
+     *
+     * @throws IOException If an error occurs while creating a temporary file.
+     */
     @BeforeEach
     void setUp() throws IOException {
-        // Redirect System.out to capture console output
         System.setOut(new PrintStream(outContent));
 
-        // Create a temporary file for Storage
         tempFile = Files.createTempFile("test", ".txt").toFile();
         tempFile.deleteOnExit();
 
-        // Initialize dependencies
         taskList = new TaskList();
         ui = new Ui();
         storage = new Storage() {
             @Override
             public List<Task> load() throws EngulfyError {
-                return List.of(); // Return an empty list for testing
+                return List.of();
             }
 
             @Override
@@ -56,41 +67,51 @@ class MarkCommandTest {
                         writer.write(task.toString() + "\n");
                     }
                 } catch (IOException e) {
-                    throw new EngulfyError("Error saving tasks: " + e.getMessage());
+                    throw new EngulfyError("error saving tasks: " + e.getMessage());
                 }
             }
         };
 
-        // Add some tasks to the TaskList
-        taskList.addTask(new Todo("Task 1"));
-        taskList.addTask(new Todo("Task 2"));
-        taskList.addTask(new Todo("Task 3"));
+        taskList.addTask(new Todo("task 1"));
+        taskList.addTask(new Todo("task 2"));
+        taskList.addTask(new Todo("task 3"));
     }
 
+    /**
+     * Clean up resources after each test method.
+     * Restores the original System.out and deletes the temporary file.
+     */
     @AfterEach
     void tearDown() {
-        // Restore System.out
         System.setOut(originalOut);
 
-        // Delete the temporary file
         if (tempFile != null && tempFile.exists()) {
             tempFile.delete();
         }
     }
 
+    /**
+     * Tests that the MarkCommand constructor handles valid input correctly.
+     */
     @Test
     void testConstructor_ValidInput() {
-        // Test valid input
         assertDoesNotThrow(() -> new MarkCommand("1"));
     }
 
+    /**
+     * Tests that the MarkCommand constructor throws an exception for invalid input.
+     */
     @Test
     void testConstructor_InvalidInput() {
-        // Test invalid input (non-numeric)
         EngulfyError exception = assertThrows(EngulfyError.class, () -> new MarkCommand("abc"));
-        assertEquals("Please specify a valid task number to mark!", exception.getMessage());
+        assertEquals("This does not seem like a number to Engulfy :/", exception.getMessage());
     }
 
+    /**
+     * Tests that the execute method marks a task as done successfully.
+     *
+     * @throws EngulfyError If an error occurs during task marking.
+     */
     @Test
     void testExecute_MarkTaskSuccessfully() throws EngulfyError {
         MarkCommand command = new MarkCommand("2");
@@ -98,9 +119,9 @@ class MarkCommandTest {
         command.execute(taskList, ui, storage);
 
         Task markedTask = taskList.getAllTasks().get(1);
-        assertTrue(markedTask.isDone );
+        assertTrue(markedTask.isDone() );
 
-        String expectedOutput = "Nice! I've marked this task as done:\n" +
+        String expectedOutput = "NICEE! Keep up the good work!\n" +
                 "    " + markedTask + "\n" +
                 "____________________________________________________________\n";
 
@@ -108,21 +129,26 @@ class MarkCommandTest {
         assertEquals(expectedOutput, actualOutput);
     }
 
+    /**
+     * Tests that the execute method throws an exception when the task index is invalid.
+     */
     @Test
     void testExecute_InvalidIndex() {
         MarkCommand command;
         try {
-            command = new MarkCommand("10"); // Invalid index
+            command = new MarkCommand("10");
         } catch (EngulfyError e) {
             fail("Unexpected EngulfyError during MarkCommand creation: " + e.getMessage());
             return;
         }
 
-
         EngulfyError exception = assertThrows(EngulfyError.class, () -> command.execute(taskList, ui, storage));
         assertEquals("Your task number is a little TOOOO big or small! try again :D", exception.getMessage());
     }
 
+    /**
+     * Tests that the isExit method returns false for MarkCommand (indicating it does not exit the program).
+     */
     @Test
     void testIsExit() {
         MarkCommand command;

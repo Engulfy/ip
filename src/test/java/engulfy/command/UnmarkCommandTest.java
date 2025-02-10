@@ -1,4 +1,4 @@
-package Engulfy.Command;
+package engulfy.command;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -8,20 +8,26 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.List;
 
-import Engulfy.Error.EngulfyError;
-import Engulfy.Storage.Storage;
-import Engulfy.Task.Task;
-import Engulfy.Task.TaskList;
-import Engulfy.Task.Todo;
-import Engulfy.Ui.Ui;
+import engulfy.error.EngulfyError;
+import engulfy.storage.Storage;
+import engulfy.task.Task;
+import engulfy.task.TaskList;
+import engulfy.task.Todo;
+import engulfy.ui.Ui;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Unit tests for the UnmarkCommand class, which marks tasks as not done.
+ */
 class UnmarkCommandTest {
-
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
@@ -30,22 +36,25 @@ class UnmarkCommandTest {
     private Storage storage;
     private File tempFile;
 
+    /**
+     * Set up the environment for testing by initializing necessary components.
+     * Redirects System.out to capture output for testing.
+     *
+     * @throws IOException If an error occurs while creating a temporary file.
+     */
     @BeforeEach
     void setUp() throws IOException {
-        // Redirect System.out to capture console output
         System.setOut(new PrintStream(outContent));
 
-        // Create a temporary file for Storage
         tempFile = Files.createTempFile("test", ".txt").toFile();
         tempFile.deleteOnExit();
 
-        // Initialize dependencies
         taskList = new TaskList();
         ui = new Ui();
         storage = new Storage() {
             @Override
             public List<Task> load() throws EngulfyError {
-                return List.of(); // Return an empty list for testing
+                return List.of();
             }
 
             @Override
@@ -55,84 +64,93 @@ class UnmarkCommandTest {
                         writer.write(task.toString() + "\n");
                     }
                 } catch (IOException e) {
-                    throw new EngulfyError("Error saving tasks: " + e.getMessage());
+                    throw new EngulfyError("error saving tasks: " + e.getMessage());
                 }
             }
         };
 
-        // Add some tasks to the TaskList
-        taskList.addTask(new Todo("Task 1"));
-        taskList.addTask(new Todo("Task 2"));
-        taskList.addTask(new Todo("Task 3"));
+        taskList.addTask(new Todo("task 1"));
+        taskList.addTask(new Todo("task 2"));
+        taskList.addTask(new Todo("task 3"));
 
-        // Mark all tasks as done initially for testing unmarking
         for (Task task : taskList.getAllTasks()) {
             task.markAsDone();
         }
     }
 
+    /**
+     * Clean up resources after each test method.
+     * Restores the original System.out and deletes the temporary file.
+     */
     @AfterEach
     void tearDown() {
-        // Restore System.out
         System.setOut(originalOut);
 
-        // Delete the temporary file
         if (tempFile != null && tempFile.exists()) {
             tempFile.delete();
         }
     }
 
+    /**
+     * Tests that the UnmarkCommand constructor handles valid input correctly.
+     */
     @Test
     void testConstructor_ValidInput() {
-        // Test valid input
         assertDoesNotThrow(() -> new UnmarkCommand("1"));
     }
 
+    /**
+     * Tests that the UnmarkCommand constructor throws an exception for invalid input.
+     */
     @Test
     void testConstructor_InvalidInput() {
-        // Test invalid input (non-numeric)
         EngulfyError exception = assertThrows(EngulfyError.class, () -> new UnmarkCommand("abc"));
-        assertEquals("Please specify a valid task number to unmark", exception.getMessage());
+        assertEquals("This does not seem like a number to Engulfy :/", exception.getMessage());
     }
 
+    /**
+     * Tests that the execute method marks a task as not done successfully.
+     *
+     * @throws EngulfyError If an error occurs during task unmarking.
+     */
     @Test
     void testExecute_UnmarkTaskSuccessfully() throws EngulfyError {
-        // Arrange
         UnmarkCommand command = new UnmarkCommand("2");
 
-        // Act
         command.execute(taskList, ui, storage);
 
-        // Assert
-        Task unmarkedTask = taskList.getAllTasks().get(1); // Index 1 corresponds to "Task 2"
-        assertFalse(unmarkedTask.isDone); // Verify that the task is marked as not done
+        Task unmarkedTask = taskList.getAllTasks().get(1);
+        assertFalse(unmarkedTask.isDone());
 
-        String expectedOutput = "OK, I've marked this task as not done yet:\n" +
+        String expectedOutput = "Aww, it's ok! You got this!\n" +
                 "    " + unmarkedTask + "\n" +
                 "____________________________________________________________\n";
         String actualOutput = outContent.toString();
         assertEquals(expectedOutput, actualOutput);
     }
 
+    /**
+     * Tests that the execute method throws an exception when the task index is invalid.
+     */
     @Test
     void testExecute_InvalidIndex() {
-        // Arrange
         UnmarkCommand command;
         try {
-            command = new UnmarkCommand("10"); // Invalid index
+            command = new UnmarkCommand("10");
         } catch (EngulfyError e) {
             fail("Unexpected EngulfyError during UnmarkCommand creation: " + e.getMessage());
             return;
         }
 
-        // Act & Assert
         EngulfyError exception = assertThrows(EngulfyError.class, () -> command.execute(taskList, ui, storage));
         assertEquals("Your task number is a little TOOOO big or small! try again :D", exception.getMessage());
     }
 
+    /**
+     * Tests that the isExit method returns false for UnmarkCommand (indicating it does not exit the program).
+     */
     @Test
     void testIsExit() {
-        // Arrange
         UnmarkCommand command;
         try {
             command = new UnmarkCommand("1");
@@ -141,7 +159,6 @@ class UnmarkCommandTest {
             return;
         }
 
-        // Act & Assert
         assertFalse(command.isExit());
     }
 }
