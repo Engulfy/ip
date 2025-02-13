@@ -6,7 +6,6 @@ import engulfy.task.TaskList;
 import engulfy.ui.Ui;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FindCommand implements Command {
     private final String keyword;
