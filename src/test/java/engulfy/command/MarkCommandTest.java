@@ -1,13 +1,23 @@
 package engulfy.command;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
-
 import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import engulfy.error.EngulfyError;
 import engulfy.storage.Storage;
@@ -15,16 +25,6 @@ import engulfy.task.Task;
 import engulfy.task.TaskList;
 import engulfy.task.Todo;
 import engulfy.ui.Ui;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Unit tests for the MarkCommand class, which marks tasks as done.
@@ -94,7 +94,7 @@ class MarkCommandTest {
      * Tests that the MarkCommand constructor handles valid input correctly.
      */
     @Test
-    void testConstructor_ValidInput() {
+    void testConstructorValidInput() {
         assertDoesNotThrow(() -> new MarkCommand("1"));
     }
 
@@ -102,7 +102,7 @@ class MarkCommandTest {
      * Tests that the MarkCommand constructor throws an exception for invalid input.
      */
     @Test
-    void testConstructor_InvalidInput() {
+    void testConstructorInvalidInput() {
         EngulfyError exception = assertThrows(EngulfyError.class, () -> new MarkCommand("abc"));
         assertEquals("This does not seem like a number to Engulfy :/", exception.getMessage());
     }
@@ -113,17 +113,17 @@ class MarkCommandTest {
      * @throws EngulfyError If an error occurs during task marking.
      */
     @Test
-    void testExecute_MarkTaskSuccessfully() throws EngulfyError {
+    void testExecuteMarkTaskSuccessfully() throws EngulfyError {
         MarkCommand command = new MarkCommand("2");
 
         command.execute(taskList, ui, storage);
 
         Task markedTask = taskList.getAllTasks().get(1);
-        assertTrue(markedTask.isDone() );
+        assertTrue(markedTask.isDone());
 
-        String expectedOutput = "NICEE! Keep up the good work!\n" +
-                "    " + markedTask + "\n" +
-                "____________________________________________________________\n";
+        String expectedOutput = "NICEE! Keep up the good work!\n"
+                + "    " + markedTask + "\n"
+                + "____________________________________________________________\n";
 
         String actualOutput = outContent.toString();
         assertEquals(expectedOutput, actualOutput);
@@ -133,7 +133,7 @@ class MarkCommandTest {
      * Tests that the execute method throws an exception when the task index is invalid.
      */
     @Test
-    void testExecute_InvalidIndex() {
+    void testExecuteInvalidIndex() {
         MarkCommand command;
         try {
             command = new MarkCommand("10");

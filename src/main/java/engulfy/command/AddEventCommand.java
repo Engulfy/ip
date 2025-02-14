@@ -21,7 +21,8 @@ public class AddEventCommand extends AddCommand {
 
         String[] parts = arguments.split(" /from ", 2);
         if (parts.length < 2 || !parts[1].contains(" /to ")) {
-            throw new EngulfyError("Engulfy does not understand your date! Use: event <description> /from <datetime> /to <datetime>");
+            throw new EngulfyError("Engulfy does not understand your date! "
+                    + "Use: event <description> /from <datetime> /to <datetime>");
         }
 
         String[] timeParts = parts[1].split(" /to ", 2);

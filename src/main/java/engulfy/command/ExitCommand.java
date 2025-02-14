@@ -9,7 +9,7 @@ import engulfy.ui.Ui;
  * This command displays a goodbye message and indicates that the application should terminate.
  */
 public class ExitCommand implements Command {
-    @Override
+
     /**
      * Executes the exit command by displaying a goodbye message via the UI.
      *
@@ -17,16 +17,18 @@ public class ExitCommand implements Command {
      * @param ui the user interface to display the goodbye message
      * @param storage the storage (not used in this command)
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showGoodbye();
     }
 
-    @Override
+
     /**
      * Checks if the command results in an exit action.
      *
      * @return true since this is an exit command
      */
+    @Override
     public boolean isExit() {
         return true;
     }

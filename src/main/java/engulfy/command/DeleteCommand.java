@@ -27,7 +27,7 @@ public class DeleteCommand implements Command {
         }
     }
 
-    @Override
+
     /**
      * Executes the command, deleting the task at the specified index, saving the updated task list,
      * and displaying the updated UI.
@@ -37,18 +37,19 @@ public class DeleteCommand implements Command {
      * @param storage the storage to persist the updated task list
      * @throws EngulfyError if an error occurs during the task removal or saving process
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
         Task removedTask = tasks.deleteTask(index);
         storage.save(tasks);
         ui.showTaskRemoved(removedTask, tasks.size());
     }
 
-    @Override
     /**
      * Checks if the command results in an exit action.
      *
      * @return false since the delete command does not cause the application to exit
      */
+    @Override
     public boolean isExit() {
         return false;
     }

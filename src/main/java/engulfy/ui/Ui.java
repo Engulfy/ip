@@ -1,10 +1,14 @@
 package engulfy.ui;
 
-import engulfy.task.Task;
-
 import java.util.List;
 import java.util.Scanner;
 
+import engulfy.task.Task;
+
+/**
+ * Represents the UI component that handles user interaction, including displaying messages,
+ * reading user input, and showing task lists.
+ */
 public class Ui {
     private final Scanner scanner;
 
@@ -113,9 +117,9 @@ public class Ui {
      */
     public void showTaskMarked(Task task) {
         String taskString = task.toString().trim();
-        System.out.print("NICEE! Keep up the good work!\n" +
-                "    " + taskString + "\n" +
-                "____________________________________________________________\n");
+        System.out.print("NICEE! Keep up the good work!\n"
+                + "    " + taskString + "\n"
+                + "____________________________________________________________\n");
     }
 
     /**
@@ -125,8 +129,8 @@ public class Ui {
      */
     public void showTaskUnmarked(Task task) {
         String taskString = task.toString().trim();
-        System.out.print("Aww, it's ok! You got this!\n" +
-                "    " + taskString + "\n" +
-                "____________________________________________________________\n");
+        System.out.print("Aww, it's ok! You got this!\n"
+                + "    " + taskString + "\n"
+                + "____________________________________________________________\n");
     }
 }

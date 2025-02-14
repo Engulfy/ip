@@ -30,17 +30,17 @@ public class Parser {
         String arguments = parts.length > 1 ? parts[1] : "";
 
         return switch (commandWord) {
-            case "bye" -> new ExitCommand();
-            case "list" -> new ListCommand();
-            case "delete" -> new DeleteCommand(arguments);
-            case "mark" -> new MarkCommand(arguments);
-            case "unmark" -> new UnmarkCommand(arguments);
-            case "todo" -> new AddTodoCommand(arguments);
-            case "deadline" -> new AddDeadlineCommand(arguments);
-            case "event" -> new AddEventCommand(arguments);
-            case "find" -> new FindCommand(arguments);
-            default ->
-                    throw new EngulfyError("I AM SO SORRY!! But this is not something I am capable of doing for now ;-;");
+        case "bye" -> new ExitCommand();
+        case "list" -> new ListCommand();
+        case "delete" -> new DeleteCommand(arguments);
+        case "mark" -> new MarkCommand(arguments);
+        case "unmark" -> new UnmarkCommand(arguments);
+        case "todo" -> new AddTodoCommand(arguments);
+        case "deadline" -> new AddDeadlineCommand(arguments);
+        case "event" -> new AddEventCommand(arguments);
+        case "find" -> new FindCommand(arguments);
+        default ->
+                throw new EngulfyError("I AM SO SORRY!! But this is not something I am capable of doing for now ;-;");
         };
     }
 }

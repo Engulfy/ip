@@ -1,5 +1,11 @@
 package engulfy.command;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,21 +14,16 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import engulfy.error.EngulfyError;
 import engulfy.storage.Storage;
 import engulfy.task.Task;
 import engulfy.task.TaskList;
 import engulfy.task.Todo;
 import engulfy.ui.Ui;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Unit tests for the UnmarkCommand class, which marks tasks as not done.
@@ -95,7 +96,7 @@ class UnmarkCommandTest {
      * Tests that the UnmarkCommand constructor handles valid input correctly.
      */
     @Test
-    void testConstructor_ValidInput() {
+    void testConstructorValidInput() {
         assertDoesNotThrow(() -> new UnmarkCommand("1"));
     }
 
@@ -103,7 +104,7 @@ class UnmarkCommandTest {
      * Tests that the UnmarkCommand constructor throws an exception for invalid input.
      */
     @Test
-    void testConstructor_InvalidInput() {
+    void testConstructorInvalidInput() {
         EngulfyError exception = assertThrows(EngulfyError.class, () -> new UnmarkCommand("abc"));
         assertEquals("This does not seem like a number to Engulfy :/", exception.getMessage());
     }
@@ -114,7 +115,7 @@ class UnmarkCommandTest {
      * @throws EngulfyError If an error occurs during task unmarking.
      */
     @Test
-    void testExecute_UnmarkTaskSuccessfully() throws EngulfyError {
+    void testExecuteUnmarkTaskSuccessfully() throws EngulfyError {
         UnmarkCommand command = new UnmarkCommand("2");
 
         command.execute(taskList, ui, storage);
@@ -122,9 +123,9 @@ class UnmarkCommandTest {
         Task unmarkedTask = taskList.getAllTasks().get(1);
         assertFalse(unmarkedTask.isDone());
 
-        String expectedOutput = "Aww, it's ok! You got this!\n" +
-                "    " + unmarkedTask + "\n" +
-                "____________________________________________________________\n";
+        String expectedOutput = "Aww, it's ok! You got this!\n"
+                + "    " + unmarkedTask + "\n"
+                + "____________________________________________________________\n";
         String actualOutput = outContent.toString();
         assertEquals(expectedOutput, actualOutput);
     }
@@ -133,7 +134,7 @@ class UnmarkCommandTest {
      * Tests that the execute method throws an exception when the task index is invalid.
      */
     @Test
-    void testExecute_InvalidIndex() {
+    void testExecuteInvalidIndex() {
         UnmarkCommand command;
         try {
             command = new UnmarkCommand("10");

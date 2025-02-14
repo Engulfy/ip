@@ -1,18 +1,18 @@
 package engulfy.storage;
 
-import engulfy.error.EngulfyError;
-import engulfy.task.Deadline;
-import engulfy.task.Event;
-import engulfy.task.Task;
-import engulfy.task.TaskList;
-import engulfy.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import engulfy.error.EngulfyError;
+import engulfy.task.Deadline;
+import engulfy.task.Event;
+import engulfy.task.Task;
+import engulfy.task.TaskList;
+import engulfy.task.Todo;
 
 /**
  * The Storage class handles loading and saving tasks to and from a file.
