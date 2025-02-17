@@ -21,7 +21,8 @@ public class AddDeadlineCommand extends AddCommand {
 
         String[] parts = arguments.split(" /by ", 2);
         if (parts.length < 2) {
-            throw new EngulfyError("Engulfy does not understand your date! Use: deadline <description> /by <datetime>");
+            throw new EngulfyError("Zenitsu does not understand your date!\n "
+                    + "Use: deadline <description> /by <datetime>");
         }
 
         setTask(new Deadline(parts[0], parts[1]));

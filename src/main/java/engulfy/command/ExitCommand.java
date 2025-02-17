@@ -13,15 +13,15 @@ public class ExitCommand implements Command {
     /**
      * Executes the exit command by displaying a goodbye message via the UI.
      *
-     * @param tasks the current task list (not used in this command)
-     * @param ui the user interface to display the goodbye message
-     * @param storage the storage (not used in this command)
+     * @param tasks   The current task list (not used in this command).
+     * @param ui      The user interface to display the goodbye message.
+     * @param storage The storage handler (not used in this command).
+     * @return A goodbye message indicating the application is closing.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showGoodbye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showGoodbye();
     }
-
 
     /**
      * Checks if the command results in an exit action.

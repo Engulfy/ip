@@ -1,0 +1,109 @@
+.root {
+    -fx-background-image: url("../images/background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: #ffeb3b;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+.stack-pane {
+    -fx-background-image: url("../images/background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+#scrollPane, #scrollPane .viewport {
+    -fx-background-color: transparent;
+    -fx-border-color: #fbc02d;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+    -fx-padding: 5px;
+}
+
+#dialogContainer {
+    -fx-padding: 15px;
+    -fx-spacing: 12px;
+    -fx-background-color: transparent;
+}
+
+.dialog-box {
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+}
+
+#scrollPane:hover {
+    -fx-border-color: #ffca28;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0, 0, 0);
+}
+
+#userInput {
+    -fx-background-color: #ffeb3b;
+    -fx-text-fill: black;
+    -fx-border-color: #fbc02d;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px 15px;
+    -fx-font-size: 14px;
+    -fx-transition-duration: 0.3s;
+}
+
+#userInput:hover {
+    -fx-background-color: #ffca28;
+    -fx-border-color: #ff9800;
+}
+
+#userInput:focused {
+    -fx-border-color: #f57c00;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(255, 23, 68, 0.4), 10, 0, 0, 0);
+    -fx-background-color: #ffca28;
+}
+
+#sendButton {
+    -fx-background-color: linear-gradient(to bottom right, #fbc02d, #ff9800);
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 0);
+    -fx-transition-duration: 0.2s;
+}
+
+#sendButton:hover {
+    -fx-background-color: linear-gradient(to bottom right, #ff9800, #ff5722);
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 12, 0, 0, 0);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+#sendButton:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #ff6f00, #ff9100);
+    -fx-effect: dropshadow(gaussian, rgba(255,111,0,0.6), 15, 0, 0, 0);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12px;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #ffeb3b;
+    -fx-background-radius: 6px;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color:  #ffca28;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 5px 0 5px;
+}

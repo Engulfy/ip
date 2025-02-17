@@ -124,8 +124,7 @@ class UnmarkCommandTest {
         assertFalse(unmarkedTask.isDone());
 
         String expectedOutput = "Aww, it's ok! You got this!\n"
-                + "    " + unmarkedTask + "\n"
-                + "____________________________________________________________\n";
+                + "    " + unmarkedTask;
         String actualOutput = outContent.toString();
         assertEquals(expectedOutput, actualOutput);
     }

@@ -23,7 +23,7 @@ public class MarkCommand implements Command {
         try {
             this.index = Integer.parseInt(arguments);
         } catch (NumberFormatException e) {
-            throw new EngulfyError("This does not seem like a number to Engulfy :/");
+            throw new EngulfyError("This does not seem like a number to Zenitsu :/");
         }
     }
 
@@ -34,13 +34,14 @@ public class MarkCommand implements Command {
      * @param tasks the task list containing tasks
      * @param ui the user interface to display the task's updated status
      * @param storage the storage to persist the updated task list
-     * @throws EngulfyError if an error occurs during task marking or saving process
+     * @return a String message that is displayed in the UI after marking the task
+     * @throws EngulfyError if the task index is out of bounds or if an error occurs during task marking or saving
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
         Task task = tasks.markTask(index);
         storage.save(tasks);
-        ui.showTaskMarked(task);
+        return ui.showTaskMarked(task);
     }
 
     /**

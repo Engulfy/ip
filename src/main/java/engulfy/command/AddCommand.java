@@ -16,18 +16,20 @@ public abstract class AddCommand implements Command {
 
     /**
      * Executes the add command by adding a task to the task list,
-     * saving the updated list to storage, and displaying a confirmation message.
+     * saving the updated list to storage, and returning a confirmation message.
      *
      * @param tasks   The task list to which the task will be added.
      * @param ui      The user interface for displaying messages.
      * @param storage The storage handler for saving task data.
+     * @return A message confirming that the task has been added.
      * @throws EngulfyError If an error occurs while saving the task.
+     * @throws NullPointerException If the task has not been initialized.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
         tasks.addTask(task);
         storage.save(tasks);
-        ui.showTaskAdded(task, tasks.size());
+        return ui.showTaskAdded(task, tasks.size());
     }
 
     public Task getTask() {

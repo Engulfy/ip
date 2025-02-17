@@ -11,19 +11,19 @@ import engulfy.ui.Ui;
 public class ListCommand implements Command {
     /**
      * Executes the list command by displaying all tasks in the task list.
-     * If there are no tasks, a message indicating this is printed to the console.
+     * If there are no tasks, a message indicating this is displayed.
      *
-     * @param tasks the task list containing all tasks
-     * @param ui the user interface to display the task list
-     * @param storage the storage (not used in this command)
+     * @param tasks the task list containing all tasks.
+     * @param ui the user interface to display the task list.
+     * @param storage the storage (not used in this command, but needed to comply with the Command interface).
+     * @return A message with the list of tasks, or a message stating there are no tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (!tasks.isEmpty()) {
-            ui.showTaskList(tasks.getAllTasks());
+            return ui.showTaskList(tasks.getAllTasks());
         } else {
-            System.out.println("You seem very free now... Start doing something productive!");
-            System.out.println("____________________________________________________________");
+            return ("You seem very free now... Start doing something productive!");
         }
     }
 

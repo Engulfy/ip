@@ -29,19 +29,20 @@ public class DeleteCommand implements Command {
 
 
     /**
-     * Executes the command, deleting the task at the specified index, saving the updated task list,
-     * and displaying the updated UI.
+     * Executes the command by deleting the task at the specified index, saving the updated task list,
+     * and displaying a confirmation message.
      *
-     * @param tasks the task list from which the task is to be removed
-     * @param ui the user interface to display the task removal message
-     * @param storage the storage to persist the updated task list
-     * @throws EngulfyError if an error occurs during the task removal or saving process
+     * @param tasks   The task list from which the task is to be removed.
+     * @param ui      The user interface for displaying the task removal message.
+     * @param storage The storage handler to persist the updated task list.
+     * @return A confirmation message indicating the task has been removed.
+     * @throws EngulfyError If the index is out of bounds or an error occurs while saving the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
         Task removedTask = tasks.deleteTask(index);
         storage.save(tasks);
-        ui.showTaskRemoved(removedTask, tasks.size());
+        return ui.showTaskRemoved(removedTask, tasks.size());
     }
 
     /**

@@ -16,7 +16,7 @@ public class AddTodoCommand extends AddCommand {
      */
     public AddTodoCommand(String arguments) throws EngulfyError {
         if (arguments.isEmpty()) {
-            throw new EngulfyError("I need a description to help you keep track ;-;");
+            throw new EngulfyError("Zenitsu needs a description to help you keep track ;-;");
         }
 
         setTask(new Todo(arguments));

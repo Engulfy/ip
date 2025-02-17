@@ -27,25 +27,25 @@ public class FindCommand implements Command {
      * and displaying the matching tasks to the user.
      *
      * @param tasks   The task list to search within.
-     * @param ui      The user interface to interact with the user.
-     * @param storage The storage handler (not used in this command).
+     * @param ui      The user interface to interact with the user and display results.
+     * @param storage The storage handler (not used in this command, but needed to comply with the Command interface).
+     * @return A message containing the list of tasks that match the keyword, or a message stating no match was found.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> matchingTasks = tasks.getAllTasks().stream()
                 .filter(task -> task.getDescription().contains(keyword))
                 .toList();
 
-        System.out.println("____________________________________________________________");
         if (matchingTasks.isEmpty()) {
-            System.out.println("No matching tasks found.");
+            return ("Zenitsu cannot find the task you are looking for!");
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
             for (int i = 0; i < matchingTasks.size(); i++) {
-                System.out.println((i + 1) + "." + matchingTasks.get(i));
+                output.append(i + 1).append(".").append(matchingTasks.get(i)).append("\n");
             }
+            return ("Zenitsu found you!!\n\n" + output).trim();
         }
-        System.out.println("____________________________________________________________");
     }
 
     /**

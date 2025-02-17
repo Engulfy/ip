@@ -21,7 +21,7 @@ public class AddEventCommand extends AddCommand {
 
         String[] parts = arguments.split(" /from ", 2);
         if (parts.length < 2 || !parts[1].contains(" /to ")) {
-            throw new EngulfyError("Engulfy does not understand your date! "
+            throw new EngulfyError("Zenitsu does not understand your date!\n "
                     + "Use: event <description> /from <datetime> /to <datetime>");
         }
 

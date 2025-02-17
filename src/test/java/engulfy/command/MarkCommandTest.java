@@ -122,8 +122,7 @@ class MarkCommandTest {
         assertTrue(markedTask.isDone());
 
         String expectedOutput = "NICEE! Keep up the good work!\n"
-                + "    " + markedTask + "\n"
-                + "____________________________________________________________\n";
+                + "    " + markedTask;
 
         String actualOutput = outContent.toString();
         assertEquals(expectedOutput, actualOutput);

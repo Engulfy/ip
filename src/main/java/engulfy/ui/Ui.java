@@ -1,136 +1,117 @@
 package engulfy.ui;
 
 import java.util.List;
-import java.util.Scanner;
 
 import engulfy.task.Task;
+import engulfy.task.TaskList;
 
 /**
- * Represents the UI component that handles user interaction, including displaying messages,
- * reading user input, and showing task lists.
+ * Represents the UI component that generates messages for the GUI.
+ * This class handles the generation of different messages for user interaction, such as welcome, goodbye,
+ * task list display, error messages, and task-related notifications.
  */
 public class Ui {
-    private final Scanner scanner;
-
     /**
-     * Initializes the Ui object with a new scanner for user input.
+     * Generates a welcome message along with the current task list.
+     *
+     * @param tasks The list of tasks to display
+     * @return A welcome message followed by the task list, or a message indicating no tasks are saved.
      */
-    public Ui() {
-        scanner = new Scanner(System.in);
+    public String showWelcome(TaskList tasks) {
+        String welcomeMessage = "Hello there! I'm ZENITSUUU!!\nHow can I assist you?";
+        String taskMessage = tasks.isEmpty() ? "No saved tasks yet!" : showTaskList(tasks.getAllTasks());
+        return (welcomeMessage + "\n" + taskMessage).trim();
     }
 
     /**
-     * Display the welcome message to the user.
+     * Generates a goodbye message.
+     *
+     * @return A goodbye message
      */
-    public void showWelcome() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello there! I'm Engulfy");
-        System.out.println("How can I assist you?");
+    public String showGoodbye() {
+        return "Awww, will Zenitsu see you again soon?\n"
+                + "DON'T GIVE UP!!!";
     }
 
     /**
-     * Display the goodbye message to the user.
-     */
-    public void showGoodbye() {
-        System.out.println("Awww, will i see you again soon?");
-        System.out.println("____________________________________________________________");
-    }
-
-    /**
-     * Show the list of tasks to the user.
+     * Displays the list of tasks to the user.
      *
      * @param tasks List of tasks to display
+     * @return A string representation of the task list
      */
-    public void showTaskList(List<Task> tasks) {
-        System.out.println("hMmmm your day looks quite productive so far:");
+    public String showTaskList(List<Task> tasks) {
+        StringBuilder sb = new StringBuilder("Your tasks are saved with Zenitsu:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("    " + (i + 1) + ". " + tasks.get(i));
+            sb.append("    ").append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
-        System.out.println("____________________________________________________________");
+        return sb.toString().trim();
     }
 
     /**
-     * Displays a message when no tasks are available in the list.
-     */
-    public void showNoTasks() {
-        System.out.println("No saved tasks yet!");
-        System.out.println("____________________________________________________________");
-    }
-
-    /**
-     * Read the user's command.
-     *
-     * @return The command entered by the user.
-     */
-    public String readCommand() {
-        return scanner.nextLine();
-    }
-
-    /**
-     * Display an error message.
+     * Displays an error message.
      *
      * @param message The error message to display
+     * @return A string representing the error message
      */
-    public void showError(String message) {
-        System.out.println("OOPS! " + message);
-        System.out.println("____________________________________________________________");
+    public String showError(String message) {
+        return "OOPS! " + message;
     }
 
     /**
-     * Show loading error when tasks cannot be loaded.
+     * Generates a message when tasks cannot be loaded.
+     *
+     * @return A loading error message
      */
-    public void showLoadingError() {
-        System.out.println("I can't seem to load the file ;-; let's start again.");
-        System.out.println("____________________________________________________________");
+    public String showLoadingError() {
+        return "Zenitsu can't seem to load the file ;-; let's start again.";
     }
+
 
     /**
      * Displays a message when a task is added successfully.
      *
-     * @param task The task that was added.
-     * @param totalTasks The total number of tasks after adding the new task.
+     * @param task The task that was added
+     * @param totalTasks The total number of tasks after adding the new task
+     * @return A message indicating the task was added and showing the total number of tasks
      */
-    public void showTaskAdded(Task task, int totalTasks) {
-        System.out.println("Keep up the momentum! Continue adding more tasks!");
-        System.out.println("    " + task);
-        System.out.printf("Now you have %d %s in the list.%n", totalTasks, totalTasks == 1 ? "task" : "tasks");
-        System.out.println("____________________________________________________________");
+    public String showTaskAdded(Task task, int totalTasks) {
+        return "Keep up the momentum! Continue adding more tasks!\n"
+                + "    " + task + "\n"
+                + String.format("Now you have %d %s in the list.%n", totalTasks, totalTasks == 1 ? "task" : "tasks");
     }
 
     /**
      * Displays a message when a task is removed successfully.
      *
-     * @param task The task that was removed.
-     * @param totalTasks The total number of tasks after removing the task.
+     * @param task The task that was removed
+     * @param totalTasks The total number of tasks after removing the task
+     * @return A message indicating the task was removed and showing the remaining tasks
      */
-    public void showTaskRemoved(Task task, int totalTasks) {
-        System.out.println("NICEE! Looks like you no longer needs this task here :D");
-        System.out.println("    " + task);
-        System.out.printf("Now you have %d %s in the list.%n", totalTasks, totalTasks == 1 ? "task" : "tasks");
-        System.out.println("____________________________________________________________");
+    public String showTaskRemoved(Task task, int totalTasks) {
+        return "LET ZENITSU SLASH THAT TASK AWAY FOR YOU :D\n"
+                + "    " + task + "\n"
+                + String.format("Now you have %d %s in the list.%n", totalTasks, totalTasks == 1 ? "task" : "tasks");
     }
 
     /**
      * Displays a message when a task is marked as done.
      *
-     * @param task The task that was marked as done.
+     * @param task The task that was marked as done
+     * @return A message indicating the task was marked as done
      */
-    public void showTaskMarked(Task task) {
-        String taskString = task.toString().trim();
-        System.out.print("NICEE! Keep up the good work!\n"
-                + "    " + taskString + "\n"
-                + "____________________________________________________________\n");
+    public String showTaskMarked(Task task) {
+        return "NICEE! Keep up the good work!\n"
+                + "    " + task;
     }
 
     /**
      * Displays a message when a task is unmarked (set as not done).
      *
-     * @param task The task that was unmarked.
+     * @param task The task that was unmarked
+     * @return A message indicating the task was unmarked
      */
-    public void showTaskUnmarked(Task task) {
-        String taskString = task.toString().trim();
-        System.out.print("Aww, it's ok! You got this!\n"
-                + "    " + taskString + "\n"
-                + "____________________________________________________________\n");
+    public String showTaskUnmarked(Task task) {
+        return "Aww, it's ok! Zenitsu believes in you!\n"
+                + "    " + task;
     }
 }
