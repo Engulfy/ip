@@ -31,7 +31,6 @@ public abstract class AddCommand implements Command {
         assert tasks != null : "TaskList should not be null";
         assert ui != null : "Ui should not be null";
         assert storage != null : "Storage should not be null";
-        tasks.addTask(task);
         Task currentTask = getTask();
         tasks.addTask(currentTask);
         storage.save(tasks);

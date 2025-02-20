@@ -9,6 +9,7 @@ import engulfy.command.ExitCommand;
 import engulfy.command.FindCommand;
 import engulfy.command.ListCommand;
 import engulfy.command.MarkCommand;
+import engulfy.command.TagCommand;
 import engulfy.command.UnmarkCommand;
 import engulfy.error.EngulfyError;
 
@@ -61,7 +62,29 @@ public class Parser {
             case "deadline" -> new AddDeadlineCommand(arguments);
             case "event" -> new AddEventCommand(arguments);
             case "find" -> new FindCommand(arguments);
+            case "tag" -> createTagCommand(arguments);
             default -> throw new EngulfyError(INVALID_TASK_ERROR);
         };
+    }
+
+    /**
+     * Creates and returns the TagCommand object.
+     * The format for tagging would be something like "tag 1 #fun" where 1 is the task ID and #fun is the tag.
+     *
+     * @param arguments The arguments for the "tag" command (task ID and tag).
+     * @return A TagCommand object.
+     * @throws EngulfyError If the arguments are invalid.
+     */
+    private Command createTagCommand(String arguments) throws EngulfyError {
+        String[] parts = arguments.split(" ", 2);
+
+        if (parts.length != 2) {
+            throw new EngulfyError("Invalid tag command. Please use the format: tag <taskID> <tag>");
+        }
+
+        String taskId = parts[0];
+        String tag = parts[1];
+
+        return new TagCommand(Integer.parseInt(taskId) - 1, tag);
     }
 }

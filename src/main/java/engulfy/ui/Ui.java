@@ -24,7 +24,6 @@ public class Ui {
      */
     public String showWelcome(TaskList tasks) {
         assert tasks != null : "Task list cannot be null";
-        String welcomeMessage = "Hello there! I'm ZENITSUUU!!\nHow can I assist you?";
         String taskMessage = tasks.isEmpty() ? "No saved tasks yet!" : showTaskList(tasks.getAllTasks());
         return (WELCOME_MSG + "\n" + taskMessage).trim();
     }

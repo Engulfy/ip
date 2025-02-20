@@ -70,7 +70,6 @@ public class MainWindow extends AnchorPane {
         }
 
         String welcomeMessage = engulfy.getUi().showWelcome(tasks);
-        dialogContainer.getChildren().add(DialogBox.getZenitsuDialog(welcomeMessage, engulfyImage));
         assert welcomeMessage != null : "Welcome message should not be null.";
         dialogContainer.getChildren().add(DialogBox.getZenitsuDialog(welcomeMessage, engulfyImage));
     }

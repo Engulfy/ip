@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import engulfy.error.EngulfyError;
 import engulfy.task.Deadline;
@@ -39,6 +41,7 @@ public class Storage {
      */
     public List<Task> load() throws EngulfyError {
         ArrayList<Task> tasks = new ArrayList<>();
+        Set<Task> uniqueTasks = new HashSet<>();
         try {
             if (!ensureDirectoryExists()) {
                 return tasks;
@@ -48,8 +51,12 @@ public class Storage {
             if (!ensureFileExists(file)) {
                 return tasks;
             }
-
-            tasks.addAll(readTasksFromFile(file));
+            for (Task task : readTasksFromFile(file)) {
+                if (!uniqueTasks.contains(task)) {
+                    uniqueTasks.add(task);
+                    tasks.add(task);
+                }
+            }
         } catch (IOException e) {
             throw new EngulfyError("Error loading tasks: " + e.getMessage());
         }
@@ -104,7 +111,6 @@ public class Storage {
         }
         return tasks;
     }
-
 
     /**
      * Saves the given task list to the storage file.
