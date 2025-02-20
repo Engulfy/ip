@@ -15,6 +15,7 @@ public class AddEventCommand extends AddCommand {
      * @throws EngulfyError If the arguments are empty or incorrectly formatted.
      */
     public AddEventCommand(String arguments) throws EngulfyError {
+        assert arguments != null : "Arguments should not be null";
         if (arguments.isEmpty()) {
             throw new EngulfyError("I need a description to help you keep track ;-;");
         }

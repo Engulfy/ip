@@ -19,6 +19,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadline) {
         super(description);
+        assert description != null && !description.isEmpty() : "Description cannot be null or empty";
+        assert deadline != null && !deadline.isEmpty() : "Deadline cannot be null or empty";
         this.deadline = tryParseDeadline(deadline);
     }
 
@@ -52,6 +54,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert deadline != null : "Deadline should not be null";
         return "[D]" + super.toString() + " (by: "
                 + deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")) + ")";
     }

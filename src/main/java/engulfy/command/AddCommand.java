@@ -27,6 +27,10 @@ public abstract class AddCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
+        assert task != null : "Task should not be null when executing AddCommand";
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
         tasks.addTask(task);
         storage.save(tasks);
         return ui.showTaskAdded(task, tasks.size());
@@ -37,6 +41,7 @@ public abstract class AddCommand implements Command {
     }
 
     public void setTask(Task task) {
+        assert task != null : "Task should not be null when setting it";
         this.task = task;
     }
 

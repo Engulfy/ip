@@ -23,6 +23,9 @@ public class Engulfy {
         ui = new Ui();
         storage = new Storage();
         parser = new Parser();
+        assert ui != null : "UI must be initialized";
+        assert storage != null : "Storage must be initialized";
+        assert parser != null : "Parser must be initialized";
     }
 
     /**
@@ -31,6 +34,7 @@ public class Engulfy {
      * @return The current instance of the UI.
      */
     public Ui getUi() {
+        assert ui != null : "UI must not be null";
         return ui;
     }
 
@@ -40,6 +44,7 @@ public class Engulfy {
      * @return The current instance of the storage.
      */
     public Storage getStorage() {
+        assert storage != null : "Storage must not be null";
         return storage;
     }
 
@@ -53,6 +58,7 @@ public class Engulfy {
      * @throws EngulfyError If the input cannot be parsed or if an error occurs while executing the command.
      */
     public String getResponse(String input) {
+        assert input != null : "Input cannot be null";
         try {
             TaskList tasks = new TaskList(storage.load());
             Command command = parser.parse(input);

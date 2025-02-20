@@ -15,6 +15,7 @@ public class AddDeadlineCommand extends AddCommand {
      * @throws EngulfyError If the arguments are empty or incorrectly formatted.
      */
     public AddDeadlineCommand(String arguments) throws EngulfyError {
+        assert arguments != null : "Arguments should not be null";
         if (arguments.isEmpty()) {
             throw new EngulfyError("I need a description to help you keep track ;-;");
         }

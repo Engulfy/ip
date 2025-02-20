@@ -27,6 +27,8 @@ public class Storage {
      * Ensures that the necessary directories and files are ready for use.
      */
     public Storage() {
+        assert FILE_PATH != null : "File path cannot be null";
+        assert DIRECTORY_PATH != null : "Directory path cannot be null";
     }
 
     /**
@@ -79,6 +81,7 @@ public class Storage {
      * @throws EngulfyError if there is an error writing to the file
      */
     public void save(TaskList tasks) throws EngulfyError {
+        assert tasks != null : "Task list cannot be null";
         try {
             FileWriter writer = new FileWriter(FILE_PATH, false);
             for (Task task : tasks.getAllTasks()) {
@@ -98,6 +101,7 @@ public class Storage {
      * @return the corresponding Task object, or null if parsing fails
      */
     private Task parseTaskFromString(String line) {
+        assert line != null : "Line cannot be null";
         try {
             char type = line.charAt(1);
             boolean isDone = line.charAt(4) == 'X';
