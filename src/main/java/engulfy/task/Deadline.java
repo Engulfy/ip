@@ -43,6 +43,7 @@ public class Deadline extends Task {
             try {
                 return LocalDateTime.parse(deadline, formatter);
             } catch (Exception e) {
+                continue;
             }
         }
         throw new IllegalArgumentException("Are you sure you are in the correct timezone?: " + deadline);

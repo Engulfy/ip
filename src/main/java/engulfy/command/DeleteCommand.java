@@ -29,7 +29,6 @@ public class DeleteCommand implements Command {
         }
     }
 
-
     /**
      * Executes the command by deleting the task at the specified index, saving the updated task list,
      * and displaying a confirmation message.

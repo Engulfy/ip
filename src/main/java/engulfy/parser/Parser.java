@@ -18,7 +18,8 @@ import engulfy.error.EngulfyError;
  * This class supports commands such as "bye", "list", "delete", "mark", "unmark", "todo", "deadline", and "event".
  */
 public class Parser {
-    private static final String INVALID_TASK_ERROR = "I AM SO SORRY!! But this is not something I am capable of doing for now ;-;";
+    private static final String INVALID_TASK_ERROR = "I AM SO SORRY!! "
+            + "But this is not something I am capable of doing for now ;-;";
 
     /**
      * Parses the user input and returns the corresponding Command object.
@@ -37,7 +38,7 @@ public class Parser {
      * Splits the given command string into command word and arguments.
      *
      * @param fullCommand The full input string entered by the user.
-     * @return An array where the first element is the command word and the second element (if present) is the arguments.
+     * @return An array where the first element is the command word and the second element is the arguments.
      */
     private String[] splitCommand(String fullCommand) {
         return fullCommand.split(" ", 2);
@@ -53,17 +54,17 @@ public class Parser {
      */
     private Command createCommand(String commandWord, String arguments) throws EngulfyError {
         return switch (commandWord) {
-            case "bye" -> new ExitCommand();
-            case "list" -> new ListCommand();
-            case "delete" -> new DeleteCommand(arguments);
-            case "mark" -> new MarkCommand(arguments);
-            case "unmark" -> new UnmarkCommand(arguments);
-            case "todo" -> new AddTodoCommand(arguments);
-            case "deadline" -> new AddDeadlineCommand(arguments);
-            case "event" -> new AddEventCommand(arguments);
-            case "find" -> new FindCommand(arguments);
-            case "tag" -> createTagCommand(arguments);
-            default -> throw new EngulfyError(INVALID_TASK_ERROR);
+        case "bye" -> new ExitCommand();
+        case "list" -> new ListCommand();
+        case "delete" -> new DeleteCommand(arguments);
+        case "mark" -> new MarkCommand(arguments);
+        case "unmark" -> new UnmarkCommand(arguments);
+        case "todo" -> new AddTodoCommand(arguments);
+        case "deadline" -> new AddDeadlineCommand(arguments);
+        case "event" -> new AddEventCommand(arguments);
+        case "find" -> new FindCommand(arguments);
+        case "tag" -> createTagCommand(arguments);
+        default -> throw new EngulfyError(INVALID_TASK_ERROR);
         };
     }
 

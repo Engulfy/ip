@@ -24,18 +24,22 @@ public class Task {
         this.tags = new HashSet<>();
     }
 
+    /**
+     * Adds a tag to the list of tags associated with this task.
+     *
+     * @param tag the tag to be added
+     */
     public void addTag(String tag) {
         tags.add(tag);
     }
 
-    public void removeTag(String tag) {
-        tags.remove(tag);
-    }
-
-    public Set<String> getTags() {
-        return tags;
-    }
-
+    /**
+     * Returns a formatted string representation of the tags associated with this task.
+     * If there are no tags, an empty string is returned. Otherwise, the tags are
+     * concatenated and prefixed with a '#' symbol, separated by commas.
+     *
+     * @return a string representation of the tags, or an empty string if no tags exist
+     */
     public String getTagString() {
         return tags.isEmpty() ? "" : "#" + String.join(", ", tags);
     }

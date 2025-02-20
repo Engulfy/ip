@@ -37,10 +37,21 @@ public abstract class AddCommand implements Command {
         return ui.showTaskAdded(currentTask, tasks.size());
     }
 
+    /**
+     * Retrieves the task.
+     *
+     * @return the current task.
+     */
     public Task getTask() {
         return task;
     }
 
+    /**
+     * Sets a new task.
+     *
+     * @param task the task to be set.
+     * @throws AssertionError if the provided task is null.
+     */
     public void setTask(Task task) {
         assert task != null : "Task should not be null when setting it";
         this.task = task;

@@ -116,6 +116,12 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Retrieves the task at the specified index from the task list.
+     *
+     * @param index the position of the task in the list (0-based index)
+     * @return the task at the specified index
+     */
     public Task get(int index) {
         return tasks.get(index);
     }

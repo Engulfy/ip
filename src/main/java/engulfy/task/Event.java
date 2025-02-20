@@ -47,6 +47,7 @@ public class Event extends Task {
             try {
                 return LocalDateTime.parse(dateTime, formatter);
             } catch (Exception e) {
+                continue;
             }
         }
         throw new IllegalArgumentException("Are you sure you are in the correct timezone?: " + dateTime);
