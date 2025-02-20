@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
+
 #dialog {
-    -fx-background-color: #f1f1f1;
+    -fx-background-color: #333;
     -fx-border-radius: 10px;
     -fx-padding: 10px 15px;
     -fx-font-size: 14px;
-    -fx-text-fill: #333;
+    -fx-text-fill: #FFEB3B;
     -fx-max-width: 300px;
     -fx-wrap-text: true;
     -fx-background-radius: 15px;
+    -fx-font-family: "Darumadrop One", serif;
 }
 
 #displayPicture {
