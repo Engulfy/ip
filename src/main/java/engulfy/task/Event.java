@@ -8,6 +8,12 @@ import java.time.format.DateTimeFormatter;
  * It extends the Task class and includes two specific LocalDateTime objects, 'from' and 'to'.
  */
 public class Event extends Task {
+    private static final DateTimeFormatter DATETIME_FORMATTER =
+            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
+    private static final DateTimeFormatter[] ACCEPTED_FORMATTERS = {
+            DateTimeFormatter.ofPattern("M/d/yyyy HHmm"),
+            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")
+    };
     private final LocalDateTime from;
     private final LocalDateTime to;
 
@@ -34,18 +40,13 @@ public class Event extends Task {
      * @throws IllegalArgumentException if the date-time format is invalid
      */
     private LocalDateTime tryParseDateTime(String dateTime) {
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("M/d/yyyy HHmm");
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
-
-        try {
-            return LocalDateTime.parse(dateTime, formatter1);
-        } catch (Exception e1) {
+        for (DateTimeFormatter formatter : ACCEPTED_FORMATTERS) {
             try {
-                return LocalDateTime.parse(dateTime, formatter2);
-            } catch (Exception e2) {
-                throw new IllegalArgumentException("Are you sure you are in the correct timezone?: " + dateTime);
+                return LocalDateTime.parse(dateTime, formatter);
+            } catch (Exception e) {
             }
         }
+        throw new IllegalArgumentException("Are you sure you are in the correct timezone?: " + dateTime);
     }
 
     /**
@@ -56,7 +57,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a"))
-                + " to: " + to.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")) + ")";
+        return String.format("[E]%s (from: %s to: %s)",
+                super.toString(),
+                from.format(DATETIME_FORMATTER),
+                to.format(DATETIME_FORMATTER));
     }
 }

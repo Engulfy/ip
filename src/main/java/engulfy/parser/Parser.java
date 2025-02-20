@@ -17,30 +17,50 @@ import engulfy.error.EngulfyError;
  * This class supports commands such as "bye", "list", "delete", "mark", "unmark", "todo", "deadline", and "event".
  */
 public class Parser {
+    private static final String INVALID_TASK_ERROR = "I AM SO SORRY!! But this is not something I am capable of doing for now ;-;";
+
     /**
-     * Parses a full command string and returns the appropriate Command object.
+     * Parses the user input and returns the corresponding Command object.
      *
-     * @param fullCommand the full command string, potentially including arguments
-     * @return the corresponding Command object based on the parsed command word
-     * @throws EngulfyError if the command word is not recognized or if an error occurs during parsing
+     * @param fullCommand The full input string entered by the user.
+     * @return The appropriate Command object based on the parsed input.
+     * @throws EngulfyError If the command is unrecognized.
      */
     public Command parse(String fullCommand) throws EngulfyError {
-        String[] parts = fullCommand.split(" ", 2);
-        String commandWord = parts[0];
-        String arguments = parts.length > 1 ? parts[1] : "";
+        String[] parts = splitCommand(fullCommand);
+        return createCommand(parts[0], parts.length > 1 ? parts[1] : "");
+    }
 
+    /**
+     * Splits the given command string into command word and arguments.
+     *
+     * @param fullCommand The full input string entered by the user.
+     * @return An array where the first element is the command word and the second element (if present) is the arguments.
+     */
+    private String[] splitCommand(String fullCommand) {
+        return fullCommand.split(" ", 2);
+    }
+
+    /**
+     * Creates and returns the appropriate Command object based on the command word and arguments.
+     *
+     * @param commandWord The command keyword extracted from user input.
+     * @param arguments The arguments associated with the command (if any).
+     * @return A Command object corresponding to the given command word.
+     * @throws EngulfyError If the command word is unrecognized.
+     */
+    private Command createCommand(String commandWord, String arguments) throws EngulfyError {
         return switch (commandWord) {
-        case "bye" -> new ExitCommand();
-        case "list" -> new ListCommand();
-        case "delete" -> new DeleteCommand(arguments);
-        case "mark" -> new MarkCommand(arguments);
-        case "unmark" -> new UnmarkCommand(arguments);
-        case "todo" -> new AddTodoCommand(arguments);
-        case "deadline" -> new AddDeadlineCommand(arguments);
-        case "event" -> new AddEventCommand(arguments);
-        case "find" -> new FindCommand(arguments);
-        default ->
-                throw new EngulfyError("I AM SO SORRY!! But this is not something I am capable of doing for now ;-;");
+            case "bye" -> new ExitCommand();
+            case "list" -> new ListCommand();
+            case "delete" -> new DeleteCommand(arguments);
+            case "mark" -> new MarkCommand(arguments);
+            case "unmark" -> new UnmarkCommand(arguments);
+            case "todo" -> new AddTodoCommand(arguments);
+            case "deadline" -> new AddDeadlineCommand(arguments);
+            case "event" -> new AddEventCommand(arguments);
+            case "find" -> new FindCommand(arguments);
+            default -> throw new EngulfyError(INVALID_TASK_ERROR);
         };
     }
 }

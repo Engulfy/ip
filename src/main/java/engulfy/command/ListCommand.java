@@ -9,6 +9,8 @@ import engulfy.ui.Ui;
  * This command shows the tasks in the task list, or a message indicating that there are no tasks.
  */
 public class ListCommand implements Command {
+    private static final String NO_TASK_MSG = "You seem very free now... Start doing something productive!";
+
     /**
      * Executes the list command by displaying all tasks in the task list.
      * If there are no tasks, a message indicating this is displayed.
@@ -23,7 +25,7 @@ public class ListCommand implements Command {
         if (!tasks.isEmpty()) {
             return ui.showTaskList(tasks.getAllTasks());
         } else {
-            return ("You seem very free now... Start doing something productive!");
+            return (NO_TASK_MSG);
         }
     }
 

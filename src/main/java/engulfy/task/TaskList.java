@@ -9,6 +9,8 @@ import engulfy.error.EngulfyError;
  * The TaskList class manages a list of tasks and provides methods to add, delete, mark, unmark tasks.
  */
 public class TaskList {
+    private static final String OUT_OF_BOUND_ERROR = "Your task number is a little TOOOO big or small! try again :D";
+    private static final String DELETE_ERROR = "Your task number is not in my database to be deleted! try again :D";
     private final List<Task> tasks;
 
     /**
@@ -47,7 +49,7 @@ public class TaskList {
         try {
             return tasks.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new EngulfyError("Your task number is not in my database to be deleted! try again :D");
+            throw new EngulfyError(DELETE_ERROR);
         }
     }
 
@@ -64,7 +66,7 @@ public class TaskList {
             task.markAsDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new EngulfyError("Your task number is a little TOOOO big or small! try again :D");
+            throw new EngulfyError(OUT_OF_BOUND_ERROR);
         }
     }
 
@@ -81,7 +83,7 @@ public class TaskList {
             task.markAsNotDone();
             return task;
         } catch (IndexOutOfBoundsException e) {
-            throw new EngulfyError("Your task number is a little TOOOO big or small! try again :D");
+            throw new EngulfyError(OUT_OF_BOUND_ERROR);
         }
     }
 

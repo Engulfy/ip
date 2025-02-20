@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
  * and text displayed in a GUI using JavaFX.
  */
 public class DialogBox extends HBox {
+    private static final String FXML_PATH = "/view/DialogBox.fxml";
     @FXML
     private Label dialog;
     @FXML
@@ -35,7 +36,7 @@ public class DialogBox extends HBox {
      */
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(FXML_PATH));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -78,7 +79,7 @@ public class DialogBox extends HBox {
      * @param img the image to display in the ImageView
      * @return a DialogBox instance for Duke
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getZenitsuDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

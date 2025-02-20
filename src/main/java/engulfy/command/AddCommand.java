@@ -27,9 +27,10 @@ public abstract class AddCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
-        tasks.addTask(task);
+        Task currentTask = getTask();
+        tasks.addTask(currentTask);
         storage.save(tasks);
-        return ui.showTaskAdded(task, tasks.size());
+        return ui.showTaskAdded(currentTask, tasks.size());
     }
 
     public Task getTask() {
