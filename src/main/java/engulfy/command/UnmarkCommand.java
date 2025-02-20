@@ -11,6 +11,7 @@ import engulfy.ui.Ui;
  * This command unmarks a task at the specified index and updates the storage and UI accordingly.
  */
 public class UnmarkCommand implements Command {
+    private static final String NOT_NUMBER_ERROR = "This does not seem like a number to Zenitsu :/";
     private final int index;
 
     /**
@@ -24,7 +25,7 @@ public class UnmarkCommand implements Command {
         try {
             this.index = Integer.parseInt(arguments);
         } catch (NumberFormatException e) {
-            throw new EngulfyError("This does not seem like a number to Zenitsu :/");
+            throw new EngulfyError(NOT_NUMBER_ERROR);
         }
     }
 

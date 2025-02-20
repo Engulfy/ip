@@ -8,6 +8,12 @@ import java.time.format.DateTimeFormatter;
  * It extends the Task class and includes a specific deadline date and time.
  */
 public class Deadline extends Task {
+    private static final DateTimeFormatter DATETIME_FORMATTER =
+            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
+    private static final DateTimeFormatter[] ACCEPTED_FORMATTERS = {
+            DateTimeFormatter.ofPattern("M/d/yyyy HHmm"),
+            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")
+    };
     private final LocalDateTime deadline;
 
     /**
@@ -33,18 +39,14 @@ public class Deadline extends Task {
      * @throws IllegalArgumentException if the deadline format is invalid
      */
     private LocalDateTime tryParseDeadline(String deadline) {
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("M/d/yyyy HHmm");
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
-
-        try {
-            return LocalDateTime.parse(deadline, formatter1);
-        } catch (Exception e1) {
+        for (DateTimeFormatter formatter : ACCEPTED_FORMATTERS) {
             try {
-                return LocalDateTime.parse(deadline, formatter2);
-            } catch (Exception e2) {
-                throw new IllegalArgumentException("Are you sure you are in the correct timezone?: " + deadline);
+                return LocalDateTime.parse(deadline, formatter);
+            } catch (Exception e) {
             }
         }
+        throw new IllegalArgumentException("Are you sure you are in the correct timezone?: " + deadline);
+
     }
 
     /**
@@ -55,8 +57,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         assert deadline != null : "Deadline should not be null";
-        return "[D]" + super.toString() + " (by: "
-                + deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")) + ")";
+        return String.format("[D]%s (by: %s)",
+                super.toString(),
+                deadline.format(DATETIME_FORMATTER));
     }
 
 }

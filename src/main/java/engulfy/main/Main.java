@@ -16,6 +16,8 @@ import javafx.stage.Stage;
  * and linking it with the Engulfy logic.
  */
 public class Main extends Application {
+    private static final String FXML_FILE_PATH = "/view/MainWindow.fxml";
+    private static final String APP_TITLE = "Zenitsu ⚡ ";
 
     private final Engulfy engulfy = new Engulfy();
 
@@ -31,11 +33,11 @@ public class Main extends Application {
         assert stage != null : "Stage must not be null";
         assert engulfy != null : "Engulfy instance must be initialized";
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(FXML_FILE_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Zenitsu ⚡ ");
+            stage.setTitle(APP_TITLE);
             MainWindow mainWindow = fxmlLoader.getController();
             mainWindow.setEngulfy(engulfy);
             stage.show();

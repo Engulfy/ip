@@ -11,6 +11,7 @@ import engulfy.ui.Ui;
  * This command removes a task at a specified index and updates the storage and UI accordingly.
  */
 public class DeleteCommand implements Command {
+    private static final String WRONG_NUMBER_ERROR = "Please specify a valid task number to delete";
     private final int index;
 
     /**
@@ -24,7 +25,7 @@ public class DeleteCommand implements Command {
         try {
             this.index = Integer.parseInt(arguments);
         } catch (NumberFormatException e) {
-            throw new EngulfyError("Please specify a valid task number to delete");
+            throw new EngulfyError(WRONG_NUMBER_ERROR);
         }
     }
 

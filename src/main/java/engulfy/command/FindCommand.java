@@ -11,7 +11,7 @@ import engulfy.ui.Ui;
  * Represents a command to find tasks in the task list that contain a specified keyword.
  */
 public class FindCommand implements Command {
-
+    private static final String EMPTY_MSG = "Zenitsu cannot find the task you are looking for!";
     private final String keyword;
 
     /**
@@ -43,7 +43,7 @@ public class FindCommand implements Command {
                 .toList();
 
         if (matchingTasks.isEmpty()) {
-            return ("Zenitsu cannot find the task you are looking for!");
+            return (EMPTY_MSG);
         } else {
             StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
             for (int i = 0; i < matchingTasks.size(); i++) {

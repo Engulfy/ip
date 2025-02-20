@@ -11,6 +11,11 @@ import engulfy.task.TaskList;
  * task list display, error messages, and task-related notifications.
  */
 public class Ui {
+    private static final String WELCOME_MSG = "Hello there! I'm ZENITSUUU!!\nHow can I assist you?";
+    private static final String GOODBYE_MSG = "Awww, will Zenitsu see you again soon?\n"
+            + "DON'T GIVE UP!!!";
+    private static final String LOAD_ERROR_MSG = "Zenitsu can't seem to load the file ;-; let's start again.";
+
     /**
      * Generates a welcome message along with the current task list.
      *
@@ -21,7 +26,7 @@ public class Ui {
         assert tasks != null : "Task list cannot be null";
         String welcomeMessage = "Hello there! I'm ZENITSUUU!!\nHow can I assist you?";
         String taskMessage = tasks.isEmpty() ? "No saved tasks yet!" : showTaskList(tasks.getAllTasks());
-        return (welcomeMessage + "\n" + taskMessage).trim();
+        return (WELCOME_MSG + "\n" + taskMessage).trim();
     }
 
     /**
@@ -30,8 +35,7 @@ public class Ui {
      * @return A goodbye message
      */
     public String showGoodbye() {
-        return "Awww, will Zenitsu see you again soon?\n"
-                + "DON'T GIVE UP!!!";
+        return GOODBYE_MSG;
     }
 
     /**
@@ -65,7 +69,7 @@ public class Ui {
      * @return A loading error message
      */
     public String showLoadingError() {
-        return "Zenitsu can't seem to load the file ;-; let's start again.";
+        return LOAD_ERROR_MSG;
     }
 
 
@@ -119,7 +123,7 @@ public class Ui {
      */
     public String showTaskUnmarked(Task task) {
         assert task != null : "Task cannot be null";
-        return "Aww, it's ok! Zenitsu believes in you!\n"
+        return "DON'T GIVE UP! Zenitsu believes in you!\n"
                 + "    " + task;
     }
 }

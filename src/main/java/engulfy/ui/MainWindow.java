@@ -16,19 +16,20 @@ import javafx.scene.layout.VBox;
  * This class handles user input and displays dialog boxes for communication between the user and Engulfy.
  */
 public class MainWindow extends AnchorPane {
+    private static final String USER_IMAGE_PATH = "/images/DaUser.png";
+    private static final String ENGULFY_IMAGE_PATH = "/images/DaEngulfy.png";
+    private static final String DEFAULT_ERROR_MESSAGE = "Zenitsu cannot handle this!";
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Engulfy engulfy;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream(("/images/DaUser.png")));
-    private Image engulfyImage = new Image(this.getClass().getResourceAsStream(("/images/DaEngulfy.png")));
+    private Image userImage = new Image(this.getClass().getResourceAsStream((USER_IMAGE_PATH)));
+    private Image engulfyImage = new Image(this.getClass().getResourceAsStream((ENGULFY_IMAGE_PATH)));
 
     /**
      * Initializes the main window by binding the scroll pane to the height of the dialog container.
@@ -39,7 +40,6 @@ public class MainWindow extends AnchorPane {
         assert scrollPane != null : "ScrollPane should not be null.";
         assert dialogContainer != null : "Dialog container should not be null.";
         assert userInput != null : "User input field should not be null.";
-        assert sendButton != null : "Send button should not be null.";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -70,6 +70,7 @@ public class MainWindow extends AnchorPane {
         }
 
         String welcomeMessage = engulfy.getUi().showWelcome(tasks);
+        dialogContainer.getChildren().add(DialogBox.getZenitsuDialog(welcomeMessage, engulfyImage));
         assert welcomeMessage != null : "Welcome message should not be null.";
         dialogContainer.getChildren().add(DialogBox.getZenitsuDialog(welcomeMessage, engulfyImage));
     }
@@ -87,7 +88,7 @@ public class MainWindow extends AnchorPane {
         try {
             response = engulfy.getResponse(input);
         } catch (Exception e) {
-            response = engulfy.getUi().showError("Zenitsu cannot handle this!");
+            response = engulfy.getUi().showError(DEFAULT_ERROR_MESSAGE);
         }
 
         assert response != null : "Engulfy's response should not be null.";

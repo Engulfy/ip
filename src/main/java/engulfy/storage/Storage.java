@@ -32,46 +32,79 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the storage file and returns them as a list.
-     * If the file doesn't exist, a new file will be created.
+     * Loads tasks from a file and returns them as a list.
      *
-     * @return a list of tasks loaded from the file
-     * @throws EngulfyError if there is an error reading the file
+     * @return A list of tasks loaded from the file.
+     * @throws EngulfyError If an error occurs while loading tasks.
      */
     public List<Task> load() throws EngulfyError {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
+            if (!ensureDirectoryExists()) {
+                return tasks;
+            }
+
             File file = new File(FILE_PATH);
-            File directory = new File(DIRECTORY_PATH);
-
-            if (!directory.exists() && !directory.mkdirs()) {
-                System.out.println("error: Failed to create directory " + DIRECTORY_PATH);
+            if (!ensureFileExists(file)) {
                 return tasks;
             }
 
-            if (!file.exists()) {
-                if (file.createNewFile()) {
-                    System.out.println("File created: " + FILE_PATH);
-                }
-                return tasks;
-            }
+            tasks.addAll(readTasksFromFile(file));
+        } catch (IOException e) {
+            throw new EngulfyError("Error loading tasks: " + e.getMessage());
+        }
+        return tasks;
+    }
 
-            Scanner fileScanner = new Scanner(file);
+    /**
+     * Ensures that the directory for storing tasks exists.
+     *
+     * @return True if the directory exists or was successfully created, false otherwise.
+     */
+    private boolean ensureDirectoryExists() {
+        File directory = new File(DIRECTORY_PATH);
+        if (!directory.exists() && !directory.mkdirs()) {
+            System.out.println("Error: Failed to create directory " + DIRECTORY_PATH);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Ensures that the task file exists.
+     *
+     * @param file The file to check.
+     * @return True if the file exists or was successfully created, false otherwise.
+     * @throws IOException If an error occurs while creating the file.
+     */
+    private boolean ensureFileExists(File file) throws IOException {
+        if (!file.exists() && file.createNewFile()) {
+            System.out.println("File created: " + FILE_PATH);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Reads tasks from the given file and returns them as a list.
+     *
+     * @param file The file to read tasks from.
+     * @return A list of tasks read from the file.
+     * @throws IOException If an error occurs while reading the file.
+     */
+    private List<Task> readTasksFromFile(File file) throws IOException {
+        List<Task> tasks = new ArrayList<>();
+        try (Scanner fileScanner = new Scanner(file)) {
             while (fileScanner.hasNextLine()) {
-                String line = fileScanner.nextLine();
-                Task task = parseTaskFromString(line);
+                Task task = parseTaskFromString(fileScanner.nextLine());
                 if (task != null) {
                     tasks.add(task);
                 }
             }
-
-            fileScanner.close();
-        } catch (IOException e) {
-            System.out.println("error loading tasks: " + e.getMessage());
         }
-
         return tasks;
     }
+
 
     /**
      * Saves the given task list to the storage file.

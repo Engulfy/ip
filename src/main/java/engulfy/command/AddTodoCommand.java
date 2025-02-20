@@ -8,6 +8,7 @@ import engulfy.task.Todo;
  * Parses the arguments to extract the task description.
  */
 public class AddTodoCommand extends AddCommand {
+    private static final String NO_DESCRIPTION_ERROR = "Zenitsu needs a description to help you keep track ;-;";
     /**
      * Constructs an AddTodoCommand with the given arguments.
      *
@@ -17,7 +18,7 @@ public class AddTodoCommand extends AddCommand {
     public AddTodoCommand(String arguments) throws EngulfyError {
         assert arguments != null : "Arguments should not be null";
         if (arguments.isEmpty()) {
-            throw new EngulfyError("Zenitsu needs a description to help you keep track ;-;");
+            throw new EngulfyError(NO_DESCRIPTION_ERROR);
         }
 
         setTask(new Todo(arguments));
