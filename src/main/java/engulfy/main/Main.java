@@ -28,6 +28,8 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) {
+        assert stage != null : "Stage must not be null";
+        assert engulfy != null : "Engulfy instance must be initialized";
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

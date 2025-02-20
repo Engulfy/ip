@@ -18,6 +18,7 @@ public class Ui {
      * @return A welcome message followed by the task list, or a message indicating no tasks are saved.
      */
     public String showWelcome(TaskList tasks) {
+        assert tasks != null : "Task list cannot be null";
         String welcomeMessage = "Hello there! I'm ZENITSUUU!!\nHow can I assist you?";
         String taskMessage = tasks.isEmpty() ? "No saved tasks yet!" : showTaskList(tasks.getAllTasks());
         return (welcomeMessage + "\n" + taskMessage).trim();
@@ -40,6 +41,7 @@ public class Ui {
      * @return A string representation of the task list
      */
     public String showTaskList(List<Task> tasks) {
+        assert tasks != null : "Task list cannot be null";
         StringBuilder sb = new StringBuilder("Your tasks are saved with Zenitsu:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("    ").append(i + 1).append(". ").append(tasks.get(i)).append("\n");
@@ -75,6 +77,8 @@ public class Ui {
      * @return A message indicating the task was added and showing the total number of tasks
      */
     public String showTaskAdded(Task task, int totalTasks) {
+        assert task != null : "Task cannot be null";
+        assert totalTasks >= 0 : "Total tasks cannot be negative";
         return "Keep up the momentum! Continue adding more tasks!\n"
                 + "    " + task + "\n"
                 + String.format("Now you have %d %s in the list.%n", totalTasks, totalTasks == 1 ? "task" : "tasks");
@@ -88,6 +92,8 @@ public class Ui {
      * @return A message indicating the task was removed and showing the remaining tasks
      */
     public String showTaskRemoved(Task task, int totalTasks) {
+        assert task != null : "Task cannot be null";
+        assert totalTasks >= 0 : "Total tasks cannot be negative";
         return "LET ZENITSU SLASH THAT TASK AWAY FOR YOU :D\n"
                 + "    " + task + "\n"
                 + String.format("Now you have %d %s in the list.%n", totalTasks, totalTasks == 1 ? "task" : "tasks");
@@ -100,6 +106,7 @@ public class Ui {
      * @return A message indicating the task was marked as done
      */
     public String showTaskMarked(Task task) {
+        assert task != null : "Task cannot be null";
         return "NICEE! Keep up the good work!\n"
                 + "    " + task;
     }
@@ -111,6 +118,7 @@ public class Ui {
      * @return A message indicating the task was unmarked
      */
     public String showTaskUnmarked(Task task) {
+        assert task != null : "Task cannot be null";
         return "Aww, it's ok! Zenitsu believes in you!\n"
                 + "    " + task;
     }

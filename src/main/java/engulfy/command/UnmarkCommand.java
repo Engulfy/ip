@@ -20,6 +20,7 @@ public class UnmarkCommand implements Command {
      * @throws EngulfyError if the arguments cannot be parsed as a valid integer
      */
     public UnmarkCommand(String arguments) throws EngulfyError {
+        assert arguments != null : "Arguments should not be null";
         try {
             this.index = Integer.parseInt(arguments);
         } catch (NumberFormatException e) {
@@ -39,6 +40,9 @@ public class UnmarkCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EngulfyError {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
         Task task = tasks.unmarkTask(index);
         storage.save(tasks);
         return ui.showTaskUnmarked(task);
