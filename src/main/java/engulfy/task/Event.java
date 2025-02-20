@@ -27,6 +27,9 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
+        assert description != null && !description.isEmpty() : "Description cannot be null or empty";
+        assert from != null && !from.isEmpty() : "Start time cannot be null or empty";
+        assert to != null && !to.isEmpty() : "End time cannot be null or empty";
         this.from = tryParseDateTime(from);
         this.to = tryParseDateTime(to);
     }
@@ -57,6 +60,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        assert from != null : "Start time should not be null";
+        assert to != null : "End time should not be null";
         return String.format("[E]%s (from: %s to: %s)",
                 super.toString(),
                 from.format(DATETIME_FORMATTER),

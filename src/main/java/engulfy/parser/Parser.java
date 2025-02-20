@@ -27,6 +27,7 @@ public class Parser {
      * @throws EngulfyError If the command is unrecognized.
      */
     public Command parse(String fullCommand) throws EngulfyError {
+        assert fullCommand != null : "Command string cannot be null";
         String[] parts = splitCommand(fullCommand);
         return createCommand(parts[0], parts.length > 1 ? parts[1] : "");
     }

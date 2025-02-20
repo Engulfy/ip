@@ -12,5 +12,6 @@ public class EngulfyError extends Exception {
      */
     public EngulfyError(String message) {
         super(message);
+        assert message != null : "Error message cannot be null";
     }
 }

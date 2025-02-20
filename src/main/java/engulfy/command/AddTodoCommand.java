@@ -16,6 +16,7 @@ public class AddTodoCommand extends AddCommand {
      * @throws EngulfyError If the arguments are empty.
      */
     public AddTodoCommand(String arguments) throws EngulfyError {
+        assert arguments != null : "Arguments should not be null";
         if (arguments.isEmpty()) {
             throw new EngulfyError(NO_DESCRIPTION_ERROR);
         }

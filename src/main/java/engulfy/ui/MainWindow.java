@@ -37,6 +37,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        assert scrollPane != null : "ScrollPane should not be null.";
+        assert dialogContainer != null : "Dialog container should not be null.";
+        assert userInput != null : "User input field should not be null.";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
@@ -47,6 +50,7 @@ public class MainWindow extends AnchorPane {
      * @throws EngulfyError if there is an error in setting up the Engulfy instance
      */
     public void setEngulfy(Engulfy e) throws EngulfyError {
+        assert e != null : "Engulfy instance should not be null.";
         engulfy = e;
         showWelcomeMessage();
     }
@@ -67,6 +71,8 @@ public class MainWindow extends AnchorPane {
 
         String welcomeMessage = engulfy.getUi().showWelcome(tasks);
         dialogContainer.getChildren().add(DialogBox.getZenitsuDialog(welcomeMessage, engulfyImage));
+        assert welcomeMessage != null : "Welcome message should not be null.";
+        dialogContainer.getChildren().add(DialogBox.getZenitsuDialog(welcomeMessage, engulfyImage));
     }
 
     /**
@@ -77,12 +83,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert input != null : "User input should not be null.";
         String response;
         try {
             response = engulfy.getResponse(input);
         } catch (Exception e) {
             response = engulfy.getUi().showError(DEFAULT_ERROR_MESSAGE);
         }
+
+        assert response != null : "Engulfy's response should not be null.";
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

@@ -43,6 +43,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert dialog != null : "Dialog label should not be null after loading FXML.";
+        assert displayPicture != null : "Display picture should not be null after loading FXML.";
 
         dialog.setWrapText(true);
         dialog.setText(text);
@@ -55,6 +57,7 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        assert tmp.size() == 2 : "DialogBox should have exactly two children (Label and ImageView).";
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
@@ -68,18 +71,22 @@ public class DialogBox extends HBox {
      * @return a DialogBox instance for the user
      */
     public static DialogBox getUserDialog(String text, Image img) {
+        assert text != null : "User dialog text should not be null.";
+        assert img != null : "User dialog image should not be null.";
         return new DialogBox(text, img);
     }
 
     /**
-     * Creates a dialog box for Duke with the specified text and image.
+     * Creates a dialog box for Engulfy with the specified text and image.
      * The dialog box is flipped so that the image is on the left and text on the right.
      *
      * @param text the message text to display in the dialog box
      * @param img the image to display in the ImageView
-     * @return a DialogBox instance for Duke
+     * @return a DialogBox instance for Engulfy
      */
     public static DialogBox getZenitsuDialog(String text, Image img) {
+        assert text != null : "Zenitsu dialog text should not be null.";
+        assert img != null : "Zenitsu dialog image should not be null.";
         var db = new DialogBox(text, img);
         db.flip();
         return db;
