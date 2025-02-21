@@ -12,7 +12,9 @@ public class Deadline extends Task {
             DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a");
     private static final DateTimeFormatter[] ACCEPTED_FORMATTERS = {
             DateTimeFormatter.ofPattern("M/d/yyyy HHmm"),
-            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a")
+            DateTimeFormatter.ofPattern("MMM dd yyyy, h:mm a"),
+            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),
+            DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a")
     };
     private final LocalDateTime deadline;
 
