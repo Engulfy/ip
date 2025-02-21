@@ -12,6 +12,7 @@ Welcome to **Engulfy**, your personal task manager chatbot with a theme revolvin
 4. Run the following command to start Engulfy:
    ```sh
    java -jar Engulfy.jar
+   ```
 
 ## 🛠 Features
 ### ✅ Add Tasks
