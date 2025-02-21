@@ -16,13 +16,14 @@ public class UntagCommand implements Command {
 
     /**
      * Constructs an UntagCommand to remove a tag from a specific task.
+     * If the provided tag starts with '#', the prefix is removed before storing.
      *
      * @param taskIndex The index of the task to untag.
-     * @param tag The tag to remove from the task.
+     * @param tag the tag to be removed, with an optional '#' prefix that will be removed
      */
     public UntagCommand(int taskIndex, String tag) {
         this.taskIndex = taskIndex;
-        this.tag = tag;
+        this.tag = tag.startsWith("#") ? tag.substring(1).trim() : tag.trim();
     }
 
     /**

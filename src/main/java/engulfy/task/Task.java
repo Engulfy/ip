@@ -57,14 +57,16 @@ public class Task {
     }
 
     /**
-     * Returns a formatted string representation of the tags associated with this task.
-     * If there are no tags, an empty string is returned. Otherwise, the tags are
-     * concatenated and prefixed with a '#' symbol, separated by commas.
+     * Returns a formatted string representation of the tags, prefixed with '#'.
+     * If there are no tags, an empty string is returned.
      *
-     * @return a string representation of the tags, or an empty string if no tags exist
+     * @return a space-separated string of tags prefixed with '#', or an empty string if no tags exist
      */
     public String getTagString() {
-        return tags.isEmpty() ? "" : "#" + String.join(", ", tags);
+        if (tags.isEmpty()) {
+            return "";
+        }
+        return "#" + String.join(" #", tags);
     }
 
     /**

@@ -17,13 +17,14 @@ public class TagCommand implements Command {
 
     /**
      * Constructs a TagCommand to add a tag to a specific task.
+     * If the provided tag starts with '#', the prefix is removed before storing.
      *
      * @param taskIndex The index of the task to tag.
-     * @param tag The tag to add to the task.
+     * @param tag the tag to be added, with an optional '#' prefix that will be removed
      */
     public TagCommand(int taskIndex, String tag) {
         this.taskIndex = taskIndex;
-        this.tag = tag;
+        this.tag = tag.startsWith("#") ? tag.substring(1).trim() : tag.trim();;
     }
 
     /**
