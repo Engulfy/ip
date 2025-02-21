@@ -22,6 +22,7 @@ Engulfy supports three types of tasks:
 - **Event**: `event TASK_DESCRIPTION /from DATE_TIME /to DATE_TIME`
 - **To Note**: 
   - `Ensure DATE_TIME is in format of "M/d/yyyy HHmm" (default), "MMM dd yyyy, h:mm a", "d/M/yyyy HHmm" or "dd MMM yyyy, h:mm a"`
+    
 
 📌 **Example:**
 ```sh
@@ -39,6 +40,7 @@ list
 ### ✍️ Mark/Unmark Tasks
 Mark a task as completed or incomplete:
 - `To Note: Ensure TASK_NUMBER is in range of saved tasks`
+  
 ```sh
 mark TASK_NUMBER
 unmark TASK_NUMBER
@@ -47,6 +49,7 @@ unmark TASK_NUMBER
 ### ❌ Delete Tasks
 Remove a specific task:  
 - `To Note: Ensure TASK_NUMBER is in range of saved tasks`
+  
 ```sh
 delete TASK_NUMBER
 ```
@@ -60,6 +63,7 @@ find KEYWORD
 ### 🏷 Tag/Untag Tasks
 Add/Remove tags to tasks to categorize them:
 - `To Note: Ensure TASK_NUMBER is in range of saved tasks`
+  
 ```sh
 tag TASK_NUMBER TAG_NAME
 untag TASK_NUMBER TAG_NAME
