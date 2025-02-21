@@ -9,7 +9,7 @@ import engulfy.ui.Ui;
  * This command shows the tasks in the task list, or a message indicating that there are no tasks.
  */
 public class ListCommand implements Command {
-    private static final String NO_TASK_MSG = "You seem very free now... Start doing something productive!";
+    private static final String NO_TASK_MSG = "You seem very free now... Shouldn't you be training with the HASHIRAs?!?!";
 
     /**
      * Executes the list command by displaying all tasks in the task list.

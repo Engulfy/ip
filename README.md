@@ -1,26 +1,69 @@
-# Duke project template
+# Engulfy User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## ⚡ Introduction ⚡
+Welcome to **Engulfy**, your personal task manager chatbot with a theme revolving around Zenitsu!
 
-## Setting up in Intellij
+![Example Image](/docs/Ui.png)
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+## 🚀 Installation
+1. **Ensure Java 17 or later** is installed on your system.
+2. **Download** the latest Engulfy JAR file from the [release page](https://github.com/Engulfy/ip/releases).
+3. **Open a terminal** and navigate to the folder containing the JAR file.
+4. Run the following command to start Engulfy:
+   ```sh
+   java -jar Engulfy.jar
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+## 🛠 Features
+### ✅ Add Tasks
+Engulfy supports three types of tasks:
+- **ToDo**: `todo TASK_DESCRIPTION`
+- **Deadline**: `deadline TASK_DESCRIPTION /by DATE_TIME`
+- **Event**: `event TASK_DESCRIPTION /from DATE_TIME /to DATE_TIME`
+- **To Note**:
+   - `Ensure DATE_TIME is in format of "M/d/yyyy HHmm" (default), "MMM dd yyyy, h:mm a", "d/M/yyyy HHmm" or "dd MMM yyyy, h:mm a"`
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+📌 **Example:**
+```sh
+todo SWORD TRAINING!
+deadline MASTER LIGHTNING BREATHING! /by 02/20/2025 2359
+event HASHIRA TRAINING /from 01/03/2018 1400 /to 01/03/2018 1600
+```
+
+### 📋 List Tasks
+View all added tasks:
+```sh
+list
+```
+
+### ✍️ Mark/Unmark Tasks
+Mark a task as completed or incomplete:
+- `To Note: Ensure TASK_NUMBER is in range of saved tasks`
+```sh
+mark TASK_NUMBER
+unmark TASK_NUMBER
+```
+
+### ❌ Delete Tasks
+Remove a specific task:
+- `To Note: Ensure TASK_NUMBER is in range of saved tasks`
+```sh
+delete TASK_NUMBER
+```
+
+### 🔍 Find Tasks
+Search for tasks containing a keyword:
+```sh
+find KEYWORD
+```
+
+### 🏷 Tag Tasks
+Add tags to tasks to categorize them:
+```sh
+tag TASK_NUMBER TAG_NAME
+```
+
+### 🚪 Exit Engulfy
+Close the chatbot:
+```sh
+bye
+```

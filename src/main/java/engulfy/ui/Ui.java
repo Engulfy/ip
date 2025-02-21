@@ -13,7 +13,7 @@ import engulfy.task.TaskList;
 public class Ui {
     private static final String WELCOME_MSG = "Hello there! I'm ZENITSUUU!!\nHow can I assist you?";
     private static final String GOODBYE_MSG = "Awww, will Zenitsu see you again soon?\n"
-            + "DON'T GIVE UP!!!";
+            + "USE YOUR BREATH! DON'T GIVE UP!!!";
     private static final String LOAD_ERROR_MSG = "Zenitsu can't seem to load the file ;-; let's start again.";
 
     /**
@@ -24,7 +24,7 @@ public class Ui {
      */
     public String showWelcome(TaskList tasks) {
         assert tasks != null : "Task list cannot be null";
-        String taskMessage = tasks.isEmpty() ? "No saved tasks yet!" : showTaskList(tasks.getAllTasks());
+        String taskMessage = tasks.isEmpty() ? "There’s no task saved... but I’m ready to face whatever comes next!" : showTaskList(tasks.getAllTasks());
         return (WELCOME_MSG + "\n" + taskMessage).trim();
     }
 
@@ -45,7 +45,7 @@ public class Ui {
      */
     public String showTaskList(List<Task> tasks) {
         assert tasks != null : "Task list cannot be null";
-        StringBuilder sb = new StringBuilder("Your tasks are saved with Zenitsu:\n");
+        StringBuilder sb = new StringBuilder("I got them saved, so I will never forget:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("    ").append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
@@ -82,7 +82,7 @@ public class Ui {
     public String showTaskAdded(Task task, int totalTasks) {
         assert task != null : "Task cannot be null";
         assert totalTasks >= 0 : "Total tasks cannot be negative";
-        return "Keep up the momentum! Continue adding more tasks!\n"
+        return "I’ll do my best to stay organized—this task list is getting longer, but I can handle it!\n"
                 + "    " + task + "\n"
                 + String.format("Now you have %d %s in the list.%n", totalTasks, totalTasks == 1 ? "task" : "tasks");
     }
@@ -97,7 +97,7 @@ public class Ui {
     public String showTaskRemoved(Task task, int totalTasks) {
         assert task != null : "Task cannot be null";
         assert totalTasks >= 0 : "Total tasks cannot be negative";
-        return "LET ZENITSU SLASH THAT TASK AWAY FOR YOU :D\n"
+        return "Thunder Breathing, First Form: Thunderclap and Flash!\nLET ZENITSU SLASH THAT TASK AWAY FOR YOU :D\n"
                 + "    " + task + "\n"
                 + String.format("Now you have %d %s in the list.%n", totalTasks, totalTasks == 1 ? "task" : "tasks");
     }
@@ -110,7 +110,7 @@ public class Ui {
      */
     public String showTaskMarked(Task task) {
         assert task != null : "Task cannot be null";
-        return "NICEE! Keep up the good work!\n"
+        return "If You Master One, That’s Cause For Celebration!\n"
                 + "    " + task;
     }
 
@@ -122,7 +122,7 @@ public class Ui {
      */
     public String showTaskUnmarked(Task task) {
         assert task != null : "Task cannot be null";
-        return "DON'T GIVE UP! Zenitsu believes in you!\n"
+        return "DON'T GIVE UP! USE YOUR BREATH!! Zenitsu believes in you!\n"
                 + "    " + task;
     }
 }

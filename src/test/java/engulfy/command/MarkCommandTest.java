@@ -104,7 +104,7 @@ class MarkCommandTest {
     @Test
     void testConstructorInvalidInput() {
         EngulfyError exception = assertThrows(EngulfyError.class, () -> new MarkCommand("abc"));
-        assertEquals("This does not seem like a number to Engulfy :/", exception.getMessage());
+        assertEquals("This does not seem like a number to Zenitsu :/", exception.getMessage());
     }
 
     /**
@@ -121,7 +121,7 @@ class MarkCommandTest {
         Task markedTask = taskList.getAllTasks().get(1);
         assertTrue(markedTask.isDone());
 
-        String expectedOutput = "NICEE! Keep up the good work!\n"
+        String expectedOutput = "If You Master One, That’s Cause For Celebration!\n"
                 + "    " + markedTask;
 
         String actualOutput = outContent.toString();

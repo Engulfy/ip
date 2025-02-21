@@ -90,6 +90,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return getStatusIcon() + " " + description + "    " + getTagString();
+        return getStatusIcon() + " " + description + " " + getTagString();
     }
 }

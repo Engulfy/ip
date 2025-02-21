@@ -3,6 +3,8 @@
 ## ⚡ Introduction ⚡
 Welcome to **Engulfy**, your personal task manager chatbot with a theme revolving around Zenitsu!
 
+![Example Image](/docs/Ui.png)
+
 ## 🚀 Installation
 1. **Ensure Java 17 or later** is installed on your system.
 2. **Download** the latest Engulfy JAR file from the [release page](https://github.com/Engulfy/ip/releases).

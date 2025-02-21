@@ -106,7 +106,7 @@ class UnmarkCommandTest {
     @Test
     void testConstructorInvalidInput() {
         EngulfyError exception = assertThrows(EngulfyError.class, () -> new UnmarkCommand("abc"));
-        assertEquals("This does not seem like a number to Engulfy :/", exception.getMessage());
+        assertEquals("This does not seem like a number to Zenitsu :/", exception.getMessage());
     }
 
     /**
@@ -123,7 +123,7 @@ class UnmarkCommandTest {
         Task unmarkedTask = taskList.getAllTasks().get(1);
         assertFalse(unmarkedTask.isDone());
 
-        String expectedOutput = "Aww, it's ok! You got this!\n"
+        String expectedOutput = "DON'T GIVE UP! USE YOUR BREATH!! Zenitsu believes in you!\n"
                 + "    " + unmarkedTask;
         String actualOutput = outContent.toString();
         assertEquals(expectedOutput, actualOutput);
