@@ -56,14 +56,16 @@ Search for tasks containing a keyword:
 find KEYWORD
 ```
 
-### 🏷 Tag Tasks
-Add tags to tasks to categorize them:
+### 🏷 Tag/Untag Tasks
+Add/Remove tags to tasks to categorize them:
+- `To Note: Ensure TASK_NUMBER is in range of saved tasks`
 ```sh
 tag TASK_NUMBER TAG_NAME
+untag TASK_NUMBER TAG_NAME
 ```
 
 ### 🚪 Exit Engulfy
-Close the chatbot:
+Say goodbye to Engulfy bot:
 ```sh
 bye
 ```
