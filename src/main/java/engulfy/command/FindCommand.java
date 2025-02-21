@@ -49,7 +49,8 @@ public class FindCommand implements Command {
             for (int i = 0; i < matchingTasks.size(); i++) {
                 output.append(i + 1).append(".").append(matchingTasks.get(i)).append("\n");
             }
-            return ("To Find You, I Just Listened For The Sound Of Complete And Utter Betrayal And Followed That!!\n\n" + output).trim();
+            return ("To Find You, I Just Listened For The Sound Of Complete"
+                    + " And Utter Betrayal And Followed That!!\n\n" + output).trim();
         }
     }
 

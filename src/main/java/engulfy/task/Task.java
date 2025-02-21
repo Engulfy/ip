@@ -1,7 +1,7 @@
 package engulfy.task;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Task class represents a task with a description and a completion status.
@@ -10,7 +10,7 @@ import java.util.Set;
 public class Task {
     private final String description;
     private boolean isDone;
-    private Set<String> tags;
+    private final List<String> tags;
 
     /**
      * Constructs a Task with the specified description. The task is initially not done.
@@ -21,7 +21,7 @@ public class Task {
         assert description != null && !description.isEmpty() : "Description cannot be null or empty";
         this.description = description;
         this.isDone = false;
-        this.tags = new HashSet<>();
+        this.tags = new ArrayList<>();
     }
 
     /**
@@ -30,7 +30,30 @@ public class Task {
      * @param tag the tag to be added
      */
     public void addTag(String tag) {
-        tags.add(tag);
+        this.tags.add(tag);
+    }
+
+    /**
+     * Returns the list of tags.
+     *
+     * @return a list of tags
+     */
+    public List<String> getTag() {
+        return this.tags;
+    }
+
+    /**
+     * Removes a specified tag from the list of tags if it exists.
+     * If the tag is not found, prints a message indicating so.
+     *
+     * @param tag the tag to be removed
+     */
+    public void removeTag(String tag) {
+        if (tags.contains(tag)) {
+            tags.remove(tag);
+        } else {
+            System.out.println("Tag not found: " + tag);
+        }
     }
 
     /**

@@ -134,10 +134,13 @@ public class Storage {
     }
 
     /**
-     * Parses a task from a string representation loaded from the storage file.
+     * Parses a task from a formatted string and returns the corresponding Task object.
+     * The string is expected to follow a specific format indicating task type, completion status,
+     * description, and optional tags.
      *
-     * @param line the string representation of a task
-     * @return the corresponding Task object, or null if parsing fails
+     * @param line the formatted string representing the task
+     * @return the parsed Task object, or {@code null} if parsing fails
+     * @throws AssertionError if {@code line} is null
      */
     private Task parseTaskFromString(String line) {
         assert line != null : "Line cannot be null";
@@ -145,33 +148,42 @@ public class Storage {
             char type = line.charAt(1);
             boolean isDone = line.charAt(4) == 'X';
 
+            String[] parts = line.split(" #");
+            String mainPart = parts[0];
+            List<String> tags = new ArrayList<>();
+            for (int i = 1; i < parts.length; i++) {
+                tags.add(parts[i].trim());
+            }
+
             if (type == 'T') {
-                String description = line.substring(7);
+                String description = mainPart.substring(7).trim();
                 Todo task = new Todo(description);
+                addTagsToTask(task, tags);
                 if (isDone) {
                     task.markAsDone();
                 }
                 return task;
             } else if (type == 'D') {
-                int byIndex = line.lastIndexOf("(by: ");
-                String description = line.substring(7, byIndex - 1);
-                String by = line.substring(byIndex + 5, line.length() - 1);
+                int byIndex = mainPart.lastIndexOf("(by: ");
+                String description = mainPart.substring(7, byIndex - 1).trim();
+                String by = mainPart.substring(byIndex + 5, mainPart.length() - 1).trim();
                 Deadline task = new Deadline(description, by);
+                addTagsToTask(task, tags);
                 if (isDone) {
                     task.markAsDone();
                 }
                 return task;
             } else if (type == 'E') {
-                int fromIndex = line.indexOf("(from: ");
-                int toIndex = line.indexOf(" to: ");
-                String description = line.substring(7, fromIndex - 1);
-                String from = line.substring(fromIndex + 7, toIndex);
-                String to = line.substring(toIndex + 5, line.length() - 1);
+                int fromIndex = mainPart.indexOf("(from: ");
+                int toIndex = mainPart.indexOf(" to: ");
+                String description = mainPart.substring(7, fromIndex - 1).trim();
+                String from = mainPart.substring(fromIndex + 7, toIndex).trim();
+                String to = mainPart.substring(toIndex + 5, mainPart.length() - 1).trim();
                 Event task = new Event(description, from, to);
+                addTagsToTask(task, tags);
                 if (isDone) {
                     task.markAsDone();
                 }
-
                 return task;
             }
         } catch (Exception e) {
@@ -179,5 +191,17 @@ public class Storage {
         }
 
         return null;
+    }
+
+    /**
+     * Adds a list of tags to the specified task.
+     *
+     * @param task the task to which the tags will be added
+     * @param tags the list of tags to be added to the task
+     */
+    private void addTagsToTask(Task task, List<String> tags) {
+        for (String tag : tags) {
+            task.addTag(tag);
+        }
     }
 }
